@@ -11,7 +11,7 @@ namespace FiniteStateMachine
 
     public class State
     {
-        public virtual void EnterState()
+        public virtual void EnterState(Animator animator)
         {
             Debug.Log("Enter State");
         }

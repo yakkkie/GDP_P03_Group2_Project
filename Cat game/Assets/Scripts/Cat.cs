@@ -12,10 +12,13 @@ public class Cat : MonoBehaviour
 
     public NavMeshAgent agent;
     public Transform mouseTrans;
+
+    public CatFSM catFSM = new CatFSM();
     
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        catFSM.animator = GetComponent<Animator>();
         agent.speed = moveSpeed;
         agent.updateRotation = true;
 
@@ -24,13 +27,16 @@ public class Cat : MonoBehaviour
 
     public void Walk()
     {
-        Vector3 targetDest = new(Random.Range(-4, 4), 0, Random.Range(-4, 4));
-        agent.SetDestination(new(-0.25f,0.5f,-0.07f));
-        
+        Vector3 targetDest = new(Random.Range(-13, 9), 0, Random.Range(1, 3));
+        agent.SetDestination(targetDest);
+        catFSM.ChangeState(catFSM.CatState_WALK);
     }
 
     private void Update()
     {
+    
+        agent.updateRotation = true;
         agent.SetDestination(mouseTrans.position);
+        
     }
 }

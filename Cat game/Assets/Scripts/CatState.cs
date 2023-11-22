@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using FiniteStateMachine;
 
+
+
 public class CatState : State
 {
     #region State Method
-    public override void EnterState()
+    public override void EnterState(Animator animator)
     {
-        base.EnterState();
+        animator.SetBool("walkBool", false);
+        base.EnterState(animator);
     }
 
     public override void ExitState()
@@ -33,9 +36,10 @@ public class CatState_IDLE : CatState
     protected CatStateName stateName = CatStateName.IDLE;
 
     #region State Method
-    public override void EnterState()
+    public override void EnterState(Animator animator)
     {
-        base.EnterState();
+        animator.SetBool("walkBool", false);
+        base.EnterState(animator);
     }
 
     public override void ExitState()
@@ -46,6 +50,7 @@ public class CatState_IDLE : CatState
     public override void UpdateState()
     {
         base.UpdateState();
+        
     }
 
     public override void FixedUpdateState()
@@ -60,9 +65,12 @@ public class CatState_WALK : CatState
     protected CatStateName stateName = CatStateName.WALK;
 
     #region State Method
-    public override void EnterState()
+    public override void EnterState(Animator animator)
     {
-        base.EnterState();
+        animator.SetBool("test", true);
+        base.EnterState(animator);
+        
+        
     }
 
     public override void ExitState()
@@ -87,9 +95,9 @@ public class CatState_JUMP : CatState
     protected CatStateName stateName = CatStateName.JUMP;
 
     #region State Method
-    public override void EnterState()
+    public override void EnterState(Animator animator)
     {
-        base.EnterState();
+        base.EnterState(animator);
     }
 
     public override void ExitState()
@@ -114,9 +122,9 @@ public class CatState_EAT : CatState
     protected CatStateName stateName = CatStateName.EAT;
 
     #region State Method
-    public override void EnterState()
+    public override void EnterState(Animator animator)
     {
-        base.EnterState();
+        base.EnterState(animator);
     }
 
     public override void ExitState()
@@ -141,9 +149,9 @@ public class CatState_DRINK : CatState
     protected CatStateName stateName = CatStateName.DRINK;
 
     #region State Method
-    public override void EnterState()
+    public override void EnterState(Animator animator)
     {
-        base.EnterState();
+        base.EnterState(animator);
     }
 
     public override void ExitState()
