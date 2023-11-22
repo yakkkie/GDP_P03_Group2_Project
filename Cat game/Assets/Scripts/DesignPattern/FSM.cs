@@ -13,22 +13,18 @@ namespace FiniteStateMachine
     {
         public virtual void EnterState(Animator animator)
         {
-            Debug.Log("Enter State");
         }
 
         public virtual void ExitState()
         {
-            Debug.Log("Exit State");
         }
 
         public virtual void UpdateState()
         {
-            Debug.Log("Update State");
         }
 
         public virtual void FixedUpdateState()
         {
-            Debug.Log("Fixed Update State");
         }
     }
 }

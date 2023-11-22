@@ -6,37 +6,88 @@ using UnityEngine.AI;
 public class Cat : MonoBehaviour
 {
     public float moveSpeed;
-    public float hungerValue;
-    public float thirstValue;
-    public float poopooValue;
 
-    public NavMeshAgent agent;
+
+    #region Stats
+    public float MaxHealth;
+    public float MaxHunger;
+    public float MaxThirst;
+
+    public float currentHealth;
+    public float currentHunger;
+    public float currentThirst;
+
+    public float hungerDrainRate;
+    public float thirstDrainRate;
+    #endregion
+
     public Transform mouseTrans;
+    public CatFSM catFSM;
+    public CatStatusUIHandler uiHandler;
 
-    public CatFSM catFSM = new CatFSM();
-    
+    Animator animator;
+    NavMeshAgent agent;
+
     void Start()
     {
+        #region Get Components
         agent = GetComponent<NavMeshAgent>();
-        catFSM.animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        #endregion
+
+        #region Set Values
+        currentHealth = MaxHealth;
+        currentHunger = MaxHunger;
+        currentThirst = MaxThirst;
+        #endregion
+
+        catFSM = new(animator, agent);
+
         agent.speed = moveSpeed;
         agent.updateRotation = true;
 
         Walk();
-    }
 
-    public void Walk()
-    {
-        Vector3 targetDest = new(Random.Range(-13, 9), 0, Random.Range(1, 3));
-        agent.SetDestination(targetDest);
-        catFSM.ChangeState(catFSM.CatState_WALK);
+
+        StartCoroutine(HungerDrain());
     }
 
     private void Update()
     {
-    
-        agent.updateRotation = true;
-        agent.SetDestination(mouseTrans.position);
-        
+        //agent.SetDestination(mouseTrans.position);
+        catFSM.Update();
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Walk();
+        }
     }
+
+    #region Status Logic
+    public IEnumerator HungerDrain()
+    {
+        while(currentHunger > 0)
+        {
+            currentHunger -= hungerDrainRate;
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+
+    #endregion
+
+    #region Movement
+    public void Walk()
+    {
+        Vector3 targetDest = Random.insideUnitSphere * 3f;
+        targetDest += transform.position;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(targetDest, out hit, 3f, 1);
+        agent.SetDestination(hit.position);
+        catFSM.ChangeState(catFSM.CatState_WALK);
+    }
+
+    #endregion
 }
