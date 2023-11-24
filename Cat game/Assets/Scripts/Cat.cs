@@ -43,7 +43,8 @@ public class Cat : MonoBehaviour
 
         Walk();
 
-        StartCoroutine(HungerDrain());
+        //StartCoroutine(HungerDrain());
+        StartCoroutine(ThirstDrain());
     }
 
     private void Update()
@@ -67,6 +68,16 @@ public class Cat : MonoBehaviour
         while(currentHunger > 0)
         {
             currentHunger -= hungerDrainRate;
+
+            yield return new WaitForSeconds(1);
+        }
+    } 
+    
+    public IEnumerator ThirstDrain()
+    {
+        while(currentThirst > 0)
+        {
+            currentThirst -= thirstDrainRate;
 
             yield return new WaitForSeconds(1);
         }
@@ -151,7 +162,7 @@ public class Cat : MonoBehaviour
 
         NavMeshHit hit;
         NavMesh.SamplePosition(targetDest, out hit, 3f, 1);
-        agent.SetDestination(hit.position);
+        MoveTowards(hit.position);
         catFSM.ChangeState(catFSM.CatState_WALK);
     }
 
