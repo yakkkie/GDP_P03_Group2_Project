@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        // Assign the sliders in the Inspector or via code.
+        // Assign the sliders in the Inspector.
         healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
         hungerSlider = GameObject.Find("HungeSlider").GetComponent<Slider>();
         thirstSlider = GameObject.Find("ThirstSlider").GetComponent<Slider>();
@@ -54,15 +54,33 @@ public class PlayerStats : MonoBehaviour
         UpdateSliders();
     }
 
-    // Call this method when the player eats or drinks.
-    private void EatDrink()
+    // Call this method when the player eats.
+    private void Eat(float healthIncrease, float hungerIncrease)
     {
-        IncreaseStats(10f, 20f, 15f); // Adjust the amounts based on your game design.
+        IncreaseStats(healthIncrease, hungerIncrease, 5f); // Only applied when eating
     }
 
-    // You might call DecreaseStats based on your game logic, e.g., when the player takes damage or consumes resources.
+    // Call this method when the player drinks.
+    private void Drink(float healthIncrease, float thirstIncrease)
+    {
+        IncreaseStats(healthIncrease, 5f, thirstIncrease); // Only applied when drinking
+    }
+
+    // You might call DecreaseStats when the player takes damage or consumes resources.
     private void Update()
     {
         DecreaseStats();
+        UpdateUIPosition();
+    }
+    private void UpdateUIPosition()
+    {
+        // Example: Set the UI position to be above the player's position.
+        Vector3 playerPosition = transform.position;
+        Vector3 offset = new Vector3(0f, 2f, 0f); // Adjust the offset based on your design.
+
+        // Update the UI position to follow the player.
+        healthSlider.transform.position = Camera.main.WorldToScreenPoint(playerPosition + offset);
+        hungerSlider.transform.position = Camera.main.WorldToScreenPoint(playerPosition + offset);
+        thirstSlider.transform.position = Camera.main.WorldToScreenPoint(playerPosition + offset);
     }
 }
