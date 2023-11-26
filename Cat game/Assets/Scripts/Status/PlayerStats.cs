@@ -74,13 +74,15 @@ public class PlayerStats : MonoBehaviour
     }
     private void UpdateUIPosition()
     {
-        // Example: Set the UI position to be above the player's position.
-        Vector3 playerPosition = transform.position;
-        Vector3 offset = new Vector3(0f, 2f, 0f); // Adjust the offset based on your design.
+        // Example: Set the UI position based on RectTransform positions.
+        Vector3 offset = new Vector3(0f, 0f, 0f); // Adjust the offset.
 
-        // Update the UI position to follow the player.
-        healthSlider.transform.position = Camera.main.WorldToScreenPoint(playerPosition + offset);
-        hungerSlider.transform.position = Camera.main.WorldToScreenPoint(playerPosition + offset);
-        thirstSlider.transform.position = Camera.main.WorldToScreenPoint(playerPosition + offset);
+        Vector3 healthSliderPosition = healthSlider.GetComponent<RectTransform>().position + offset;
+        Vector3 hungerSliderPosition = hungerSlider.GetComponent<RectTransform>().position + offset;
+        Vector3 thirstSliderPosition = thirstSlider.GetComponent<RectTransform>().position + offset;
+
+        healthSlider.transform.position = healthSliderPosition;
+        hungerSlider.transform.position = hungerSliderPosition;
+        thirstSlider.transform.position = thirstSliderPosition;
     }
 }
