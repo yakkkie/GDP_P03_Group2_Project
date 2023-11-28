@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WaterDecreases : MonoBehaviour
+public class BowlConsume : MonoBehaviour
 {
     public GameObject bowl; // Reference to the bowl object
     public float decreaseValue = 0.1f; // Speed of y-position decrease

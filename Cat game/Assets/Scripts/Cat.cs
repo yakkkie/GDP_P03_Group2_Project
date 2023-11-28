@@ -43,8 +43,8 @@ public class Cat : MonoBehaviour
 
         Walk();
 
-        //StartCoroutine(HungerDrain());
-        StartCoroutine(ThirstDrain());
+        StartCoroutine(HungerDrain());
+        //StartCoroutine(ThirstDrain());
     }
 
     private void Update()
