@@ -7,7 +7,9 @@ using UnityEngine.AI;
 public class Cat : MonoBehaviour
 {
     public float moveSpeed;
-
+    float timer;
+    float timing;
+    bool currentRoamComplete;
 
     #region Stats
     public float MaxHealth;
@@ -41,8 +43,6 @@ public class Cat : MonoBehaviour
     {
         Initialize();
 
-        Walk();
-
         StartCoroutine(HungerDrain());
         //StartCoroutine(ThirstDrain());
     }
@@ -52,14 +52,22 @@ public class Cat : MonoBehaviour
         //agent.SetDestination(mouseTrans.position);
         catFSM.Update();
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if(timer > 3)
         {
-            Walk();
+            WalkRandomly();
+            timer = 0;
         }
+
+       
 
         CheckFlags();
         CheckPriority();
         ExecutePriority();
+    }
+
+    private void FixedUpdate()
+    {
+        timer += Time.fixedDeltaTime;
     }
 
     #region Status Logic
@@ -155,7 +163,7 @@ public class Cat : MonoBehaviour
     #endregion
 
     #region Movement
-    public void Walk()
+    public void WalkRandomly()
     {
         Vector3 targetDest = Random.insideUnitSphere * 3f;
         targetDest += transform.position;
@@ -207,6 +215,11 @@ public class Cat : MonoBehaviour
         Vector3 targetDest = Random.insideUnitSphere * 3f;
 
     }
+
+    float GetRandomTiming()
+    {
+        return Random.Range(0f, 5f);
+    }
     #endregion
 
 
@@ -240,6 +253,7 @@ public class Cat : MonoBehaviour
         catStatuses.Add(CatStatusName.THIRSTY, thirsty);
         catStatuses.Add(CatStatusName.SICK, sick);
 
+        currentRoamComplete = true;
     }
 
     public struct CatStatus
