@@ -20,6 +20,7 @@ public class Cat : MonoBehaviour
 
     public float hungerDrainRate;
     public float thirstDrainRate;
+    public float healthDrainRate;
     #endregion
 
     public Transform mouseTrans;
@@ -134,6 +135,26 @@ public class Cat : MonoBehaviour
             s.flag = false;
             catStatuses[CatStatusName.THIRSTY] = s;
         }
+
+    public IEnumerator ThirstDrain()
+    {
+        while (currentThirst > 0)
+        {
+            currentThirst -= thirstDrainRate;
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    public IEnumerator HealthDrain()
+    {
+        while (currentHunger + currentThirst > 0)
+        {
+            currentHealth -= healthDrainRate;
+
+            yield return new WaitForSeconds(1);
+        }
+    }
 
 
         //check if cat is sick or not sick
