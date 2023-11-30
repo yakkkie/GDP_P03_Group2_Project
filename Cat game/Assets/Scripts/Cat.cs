@@ -24,7 +24,6 @@ public class Cat : MonoBehaviour
     public float thirstDrainRate;
     #endregion
 
-    public Transform mouseTrans;
     public CatFSM catFSM;
     public CatStatusUIHandler uiHandler;
     public Transform foodBowlTrans;
@@ -34,7 +33,7 @@ public class Cat : MonoBehaviour
     //store the cat status and its priority
     public Dictionary<CatStatusName,CatStatus> catStatuses;
     public CatStatus currentPriority;
-    
+    Coroutine healthDrainCor;
 
     Animator animator;
     NavMeshAgent agent;
@@ -44,12 +43,11 @@ public class Cat : MonoBehaviour
         Initialize();
 
         StartCoroutine(HungerDrain());
-        //StartCoroutine(ThirstDrain());
+        StartCoroutine(ThirstDrain());
     }
 
     private void Update()
     {
-        //agent.SetDestination(mouseTrans.position);
         catFSM.Update();
 
         if(timer > 3)
@@ -58,7 +56,17 @@ public class Cat : MonoBehaviour
             timer = 0;
         }
 
-       
+        if(currentHunger/MaxHunger < 0.5 || currentThirst/MaxThirst < 0.5)
+        {
+            if(healthDrainCor == null)
+                healthDrainCor = StartCoroutine(HealthDrain());
+        }
+        else
+        {
+            if (healthDrainCor != null)
+                StopCoroutine(healthDrainCor);
+        }
+            
 
         CheckFlags();
         CheckPriority();
@@ -76,7 +84,7 @@ public class Cat : MonoBehaviour
         while(currentHunger > 0)
         {
             currentHunger -= hungerDrainRate;
-
+            currentHunger = Mathf.Clamp(currentHunger, 0, MaxHunger);
             yield return new WaitForSeconds(1);
         }
     } 
@@ -86,7 +94,26 @@ public class Cat : MonoBehaviour
         while(currentThirst > 0)
         {
             currentThirst -= thirstDrainRate;
+            currentThirst = Mathf.Clamp(currentThirst, 0, MaxThirst);
+            yield return new WaitForSeconds(1);
+        }
+    }
 
+    public IEnumerator HealthDrain()
+    {
+        while(currentHealth > 0)
+        {
+            float hungerInfluence = 1 / (currentHunger + 1);
+            if (currentHunger / MaxHunger > 0.5)
+                hungerInfluence = 0;
+
+            float thirstInfluence = 1 / (currentThirst + 1);
+            if (currentThirst / MaxThirst > 0.5)
+                thirstInfluence = 0;
+
+            float healthDrain = hungerInfluence + thirstInfluence;
+            currentHealth -= healthDrain;
+            currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
             yield return new WaitForSeconds(1);
         }
     }
@@ -97,12 +124,12 @@ public class Cat : MonoBehaviour
         foreach(var item in catStatuses.Values)
         {
 
-
             if(item.priority > highestPriority.priority && item.flag)
             {
                 Debug.Log("priority switched");
                 highestPriority = item;
             }
+
         }
 
         currentPriority = highestPriority;
