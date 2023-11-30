@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2200,10 +2200,14 @@ PrefabInstance:
       propertyPath: bowl
       value: 
       objectReference: {fileID: 1427910911}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8426614215590661852, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074916619}
     - targetCorrespondingSourceObject: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1074916618}
@@ -2225,6 +2229,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c3647cbb1709048a3d474ca290f971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1074916619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074916617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4881c841f0e9e499a957b09c1347d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decreaseValue: 0.005
+  scalingSpeed: 0.1
+  bowl: {fileID: 1427910911}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.10038428
+      value: 0.011364257
+      inSlope: 3.0803764
+      outSlope: 3.0803764
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.108744
+      value: 0.03711535
+      inSlope: 7.9322467
+      outSlope: 7.9322467
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.35831618
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.10968485
+      value: 0.06412319
+      inSlope: 5.6679964
+      outSlope: 5.6679964
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26455113
+      outWeight: 0.22035602
+    - serializedVersion: 3
+      time: 0.12228165
+      value: 0.09322941
+      inSlope: 2.3106043
+      outSlope: 2.3106043
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1118841314
 GameObject:
   m_ObjectHideFlags: 0
