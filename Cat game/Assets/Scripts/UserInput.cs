@@ -3,7 +3,8 @@ using UnityEngine;
 public class UserInput : MonoBehaviour
 {
     public LayerMask clickableLayer;
-    public CatController catController;
+    public GameObject water;
+    public GameObject food;
     public Camera camera;// This reference needs to be assigned in the Inspector
 
     void Update()
@@ -13,19 +14,23 @@ public class UserInput : MonoBehaviour
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
+           
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickableLayer))
             {
                 GameObject clickedObject = hit.collider.gameObject;
 
-                if (catController != null) // Check if the reference is null before using it
+                if (clickedObject.CompareTag("Waterbowl"))
                 {
-                    // Pass the position of the clicked object to the cat controller script
-                    catController.MoveToDestination(clickedObject.transform.position);
+                    //refill the water bowl :D
+                    water.SetActive(true);
                 }
-                else
+
+                if (clickedObject.CompareTag("Foodbowl"))
                 {
-                    Debug.LogError("CatController reference is not assigned!");
+                    //refill the water bowl :D
+                    food.SetActive(true);
                 }
+
             }
         }
     }

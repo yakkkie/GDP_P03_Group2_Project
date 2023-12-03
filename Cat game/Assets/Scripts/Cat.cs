@@ -7,7 +7,9 @@ using UnityEngine.AI;
 public class Cat : MonoBehaviour
 {
     public float moveSpeed;
-
+    float timer;
+    float timing;
+    bool currentRoamComplete;
 
     #region Stats
     public float MaxHealth;
@@ -22,7 +24,6 @@ public class Cat : MonoBehaviour
     public float thirstDrainRate;
     #endregion
 
-    public Transform mouseTrans;
     public CatFSM catFSM;
     public CatStatusUIHandler uiHandler;
     public Transform foodBowlTrans;
@@ -32,7 +33,7 @@ public class Cat : MonoBehaviour
     //store the cat status and its priority
     public Dictionary<CatStatusName,CatStatus> catStatuses;
     public CatStatus currentPriority;
-    
+    Coroutine healthDrainCor;
 
     Animator animator;
     NavMeshAgent agent;
@@ -41,24 +42,40 @@ public class Cat : MonoBehaviour
     {
         Initialize();
 
-        Walk();
-
         StartCoroutine(HungerDrain());
+        StartCoroutine(ThirstDrain());
     }
 
     private void Update()
     {
-        //agent.SetDestination(mouseTrans.position);
         catFSM.Update();
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if(timer > 3)
         {
-            Walk();
+            WalkRandomly();
+            timer = 0;
         }
+
+        if(currentHunger/MaxHunger < 0.5 || currentThirst/MaxThirst < 0.5)
+        {
+            if(healthDrainCor == null)
+                healthDrainCor = StartCoroutine(HealthDrain());
+        }
+        else
+        {
+            if (healthDrainCor != null)
+                StopCoroutine(healthDrainCor);
+        }
+            
 
         CheckFlags();
         CheckPriority();
         ExecutePriority();
+    }
+
+    private void FixedUpdate()
+    {
+        timer += Time.fixedDeltaTime;
     }
 
     #region Status Logic
@@ -67,7 +84,36 @@ public class Cat : MonoBehaviour
         while(currentHunger > 0)
         {
             currentHunger -= hungerDrainRate;
+            currentHunger = Mathf.Clamp(currentHunger, 0, MaxHunger);
+            yield return new WaitForSeconds(1);
+        }
+    } 
+    
+    public IEnumerator ThirstDrain()
+    {
+        while(currentThirst > 0)
+        {
+            currentThirst -= thirstDrainRate;
+            currentThirst = Mathf.Clamp(currentThirst, 0, MaxThirst);
+            yield return new WaitForSeconds(1);
+        }
+    }
 
+    public IEnumerator HealthDrain()
+    {
+        while(currentHealth > 0)
+        {
+            float hungerInfluence = 1 / (currentHunger + 1);
+            if (currentHunger / MaxHunger > 0.5)
+                hungerInfluence = 0;
+
+            float thirstInfluence = 1 / (currentThirst + 1);
+            if (currentThirst / MaxThirst > 0.5)
+                thirstInfluence = 0;
+
+            float healthDrain = hungerInfluence + thirstInfluence;
+            currentHealth -= healthDrain;
+            currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
             yield return new WaitForSeconds(1);
         }
     }
@@ -78,12 +124,12 @@ public class Cat : MonoBehaviour
         foreach(var item in catStatuses.Values)
         {
 
-
             if(item.priority > highestPriority.priority && item.flag)
             {
                 Debug.Log("priority switched");
                 highestPriority = item;
             }
+
         }
 
         currentPriority = highestPriority;
@@ -144,14 +190,14 @@ public class Cat : MonoBehaviour
     #endregion
 
     #region Movement
-    public void Walk()
+    public void WalkRandomly()
     {
         Vector3 targetDest = Random.insideUnitSphere * 3f;
         targetDest += transform.position;
 
         NavMeshHit hit;
         NavMesh.SamplePosition(targetDest, out hit, 3f, 1);
-        agent.SetDestination(hit.position);
+        MoveTowards(hit.position);
         catFSM.ChangeState(catFSM.CatState_WALK);
     }
 
@@ -196,6 +242,11 @@ public class Cat : MonoBehaviour
         Vector3 targetDest = Random.insideUnitSphere * 3f;
 
     }
+
+    float GetRandomTiming()
+    {
+        return Random.Range(0f, 5f);
+    }
     #endregion
 
 
@@ -229,6 +280,7 @@ public class Cat : MonoBehaviour
         catStatuses.Add(CatStatusName.THIRSTY, thirsty);
         catStatuses.Add(CatStatusName.SICK, sick);
 
+        currentRoamComplete = true;
     }
 
     public struct CatStatus

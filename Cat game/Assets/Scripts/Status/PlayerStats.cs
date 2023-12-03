@@ -70,17 +70,16 @@ public class PlayerStats : MonoBehaviour
     private void Update()
     {
         DecreaseStats();
-        UpdateSlidersPosition();
+        UpdateUIPosition();
     }
-    private void UpdateSlidersPosition()
+    private void UpdateUIPosition()
     {
-        //Set the position of each slider above the player's head.
-        Vector3 offset = new Vector3(0f, 100f, 0f); // Adjust the offset.
+        // Example: Set the UI position based on RectTransform positions.
+        Vector3 offset = new Vector3(0f, 0f, 0f); // Adjust the offset.
 
-        Vector3 playerPosition = transform.position;
-        Vector3 healthSliderPosition = Camera.main.WorldToScreenPoint(playerPosition + offset + new Vector3(0f, 60f, 0f));
-        Vector3 hungerSliderPosition = Camera.main.WorldToScreenPoint(playerPosition + offset + new Vector3(0f, 30f, 0f));
-        Vector3 thirstSliderPosition = Camera.main.WorldToScreenPoint(playerPosition + offset + new Vector3(0f, 0f, 0f));
+        Vector3 healthSliderPosition = healthSlider.GetComponent<RectTransform>().position + offset;
+        Vector3 hungerSliderPosition = hungerSlider.GetComponent<RectTransform>().position + offset;
+        Vector3 thirstSliderPosition = thirstSlider.GetComponent<RectTransform>().position + offset;
 
         healthSlider.transform.position = healthSliderPosition;
         hungerSlider.transform.position = hungerSliderPosition;
