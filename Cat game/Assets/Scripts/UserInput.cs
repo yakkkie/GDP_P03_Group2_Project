@@ -5,7 +5,22 @@ public class UserInput : MonoBehaviour
     public LayerMask clickableLayer;
     public GameObject water;
     public GameObject food;
+    public GameObject waterBowl;
+    public GameObject foodBowl;
+
+
+    private Vector3 foodBowlPos;
+    private Vector3 waterBowlPos;
+
+
+
     public Camera camera;// This reference needs to be assigned in the Inspector
+
+
+    //checks
+    public bool holdingWaterBowl;
+    public bool holdingFoodBowl;
+    
 
     void Update()
     {
@@ -17,21 +32,34 @@ public class UserInput : MonoBehaviour
            
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickableLayer))
             {
-                GameObject clickedObject = hit.collider.gameObject;
 
-                if (clickedObject.CompareTag("Waterbowl"))
+                if (holdingFoodBowl && foodBowl != null)
                 {
-                    //refill the water bowl :D
-                    water.SetActive(true);
+                    //foodBowlPos = hit.point;
+                    //foodBowl.transform.position = foodBowlPos;
+                    foodBowl.SetActive(true);
+
+                    holdingFoodBowl = false;
                 }
-
-                if (clickedObject.CompareTag("Foodbowl"))
+                else if (!holdingFoodBowl && !holdingWaterBowl)
                 {
-                    //refill the water bowl :D
-                    food.SetActive(true);
+                    GameObject clickedObject = hit.collider.gameObject;
+
+                    if (clickedObject.CompareTag("Waterbowl"))
+                    {
+                        //refill the water bowl :D
+                        water.SetActive(true);
+                    }
+
+                    if (clickedObject.CompareTag("Foodbowl"))
+                    {
+                        //refill the water bowl :D
+                        food.SetActive(true);
+                    }
                 }
 
             }
         }
     }
+
 }
