@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f9437aadcf826743994efcabf47f36c, type: 3}
-  m_Name: BTierCatFood
+  m_Script: {fileID: 11500000, guid: 03ba0bcc2fb889047b220f9c1e9db9ba, type: 3}
+  m_Name: CockroachSpray
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: BTierCatfood
-  icon: {fileID: 21300000, guid: e5519a260086a6b46a3a5e3eafb8cc74, type: 3}
+  prefab: {fileID: 3303063732644211444, guid: addde94b6dd958045818bd492a9a8d9d, type: 3}
+  type: 1
