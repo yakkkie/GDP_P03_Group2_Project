@@ -1,58 +1,90 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+public class Inventory 
 {
-    public List<Items> inventory = new List<Items>();
+    public event EventHandler OnItemListChanged;
 
-    public Transform ItemContent;
-    public GameObject InventoryItem;
-    private bool hasUIInstantiated = false;
-
-    void Start()
+    private List <Item> itemList;
+    private Action<Item> useItemAction;
+    
+    public Inventory(Action<Item> useItemAction)
     {
-        inventory.Clear();
-        AddItem(Resources.Load<Items>("ATierCatFood"));
-        AddItem(Resources.Load<Items>("BTierCatFood"));
-        AddItem(Resources.Load<Items>("CTierCatFood"));
-        AddItem(Resources.Load<Items>("CockroachSpray"));
-        AddItem(Resources.Load<Items>("ElectricSwatter"));
-        AddItem(Resources.Load<Items>("InsectRepellent"));
-        AddItem(Resources.Load<Items>("LizardKiller"));
-        AddItem(Resources.Load<Items>("NormalSwatter"));
+        this.useItemAction = useItemAction;
+        itemList = new List<Item>();
+
+        AddItem(new Item {itemType = Item.ItemType.TierAFood, amount = 1});     
+        AddItem(new Item {itemType = Item.ItemType.TierBFood, amount = 1}); 
+        AddItem(new Item {itemType = Item.ItemType.TierCFood, amount = 1}); 
+        AddItem(new Item {itemType = Item.ItemType.ElectricSwat, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.InsectRepel, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.LizzoKiller, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.Swatt, amount = 1}); 
+        AddItem(new Item {itemType = Item.ItemType.Swatt, amount = 1}); 
+        AddItem(new Item {itemType = Item.ItemType.Swatt, amount = 1}); 
+        AddItem(new Item {itemType = Item.ItemType.Swatt, amount = 1}); 
+
+        Debug.Log(itemList.Count);
     }
 
-    public void DisplayInventory()
+    public void AddItem(Item item)
     {
-        if (!hasUIInstantiated)
+        if (item.isStackable())
         {
-            foreach (var item in inventory)
+            bool itemAlreadyInIventory = false;
+            foreach(Item inventoryItem in itemList)
             {
-                GameObject itemDisplay = Instantiate(InventoryItem, ItemContent);
-                itemDisplay.GetComponentInChildren<Image>().sprite = item.icon;
+                if (inventoryItem.itemType == item.itemType)
+                {
+                    inventoryItem.amount += item.amount; 
+                    itemAlreadyInIventory = true;
+                }
             }
-            hasUIInstantiated = true;
+            if (!itemAlreadyInIventory)
+            {
+                itemList.Add(item);
+            }
+        } else {
+            itemList.Add(item);
         }
+
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void AddItem(Items item)
+    public void RemoveItem(Item item)
     {
-        inventory.Add(item);
-        Debug.Log(item.itemName + " added to inventory.");
+        if (item.isStackable())
+        {
+            Item itemInInventory = null;
+            foreach(Item inventoryItem in itemList)
+            {
+                if (inventoryItem.itemType == item.itemType)
+                {
+                    inventoryItem.amount -= item.amount; 
+                    itemInInventory = inventoryItem;
+                }
+            }
+            if (itemInInventory != null && itemInInventory.amount <= 0)
+            {
+                itemList.Remove(itemInInventory);
+            }
+        } else {
+            itemList.Add(item);
+        }
+
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void UseItem(Items item)
+    public void UseItem(Item item)
     {
-        if (inventory.Contains(item))
-        {
-            Debug.Log("Using " + item.itemName);
-            inventory.Remove(item);
-        }
-        else
-        {
-            Debug.Log("Item not found in inventory.");
-        }
+        useItemAction(item);
+    }
+
+    public List<Item> GetItemList()
+    {
+        return itemList;
     }
 }
