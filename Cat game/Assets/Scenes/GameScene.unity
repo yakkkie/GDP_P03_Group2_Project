@@ -1738,7 +1738,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 534870744}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ClickButtons, Assembly-CSharp
         m_MethodName: OnFoodBowlButtonClick
         m_Mode: 1
@@ -1759,10 +1759,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 534870739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34c03566dbea814a84228a5d86c2aab, type: 3}
+  m_Script: {fileID: 11500000, guid: 627d8722f35b8c548b5db840322a0759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userInput: {fileID: 540339812}
+  PrefabToInstantiate: {fileID: 1427910911}
+  UIDragElement: {fileID: 858286875}
+  Canvas: {fileID: 2000346176}
+  clickableLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  camera: {fileID: 1414176679}
 --- !u!1 &540339811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,7 +2437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727854402}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44462124, y: 0.051827054, z: -0.044058934, w: 0.8931319}
+  m_LocalRotation: {x: 0.44462126, y: 0.05182706, z: -0.04405895, w: 0.89313203}
   m_LocalPosition: {x: 0.00005340576, y: -0.000004950896, z: -0.00003158735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3181,7 +3187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961307388}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46078977, y: 0.051006384, z: -0.0449936, w: 0.88489926}
+  m_LocalRotation: {x: 0.46078986, y: 0.051006366, z: -0.04499361, w: 0.8848993}
   m_LocalPosition: {x: 0.00010681152, y: -0.000012731785, z: -0.000063594925}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3448,7 +3454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874404727940277197, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4272,7 +4278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414176677}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2280297, y: -0.3540166, z: 0.08943811, w: 0.90259385}
+  m_LocalRotation: {x: 0.22802965, y: -0.3540166, z: 0.089438096, w: 0.90259373}
   m_LocalPosition: {x: 0.9310561, y: 1.653987, z: 2.6680236}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
