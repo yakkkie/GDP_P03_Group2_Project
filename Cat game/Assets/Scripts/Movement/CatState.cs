@@ -253,28 +253,6 @@ public class CatState_DRINK : CatState
     }
 }
 
-public class CatState_DIE : CatState
-{
-    protected CatStateName name = CatStateName.DIE;
-    #region State Method
-    public override void EnterState(Animator animator)
-    {
-        base.EnterState(animator);
-    }
-
-    public override void ExitState()
-    {
-        base.ExitState();
-    }
-
-    #endregion
-    public CatState_DIE(Animator Animator, CatFSM fsm) : base(Animator, fsm)
-    {
-
-    }
-}
-
-
 public enum CatStateName //representation of all the cat states
 {
     IDLE,
@@ -282,5 +260,4 @@ public enum CatStateName //representation of all the cat states
     JUMP,
     EAT,
     DRINK,
-    DIE,
 }
