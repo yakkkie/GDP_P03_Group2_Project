@@ -16,7 +16,18 @@ public class Inventory
         itemList = new List<Item>();
 
         AddItem(new Item {itemType = Item.ItemType.TierAFood, amount = 1});     
+        AddItem(new Item {itemType = Item.ItemType.TierBFood, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.TierCFood, amount = 1});     
         AddItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.ElectricSwat, amount = 1});     
+        AddItem(new Item {itemType = Item.ItemType.InsectRepel, amount = 1});
+        AddItem(new Item {itemType = Item.ItemType.LizzoKiller, amount = 1});     
+        AddItem(new Item {itemType = Item.ItemType.Swatt, amount = 1});
+        
         
 
         Debug.Log(itemList.Count);

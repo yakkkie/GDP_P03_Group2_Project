@@ -47,6 +47,5 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public void SetCanInteract(bool value)
     {
         canInteract = value;
-        Debug.Log("canInteract set to: " + canInteract);
     }
 }
