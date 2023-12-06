@@ -62,6 +62,7 @@ public class CatFSM : FSM
         CatState_IDLE = new(this);
         CatState_EAT = new(this);
         CatState_DRINK = new(this);
+        catState_DIE = new(this);
 
         currentState = CatState_IDLE;
     }

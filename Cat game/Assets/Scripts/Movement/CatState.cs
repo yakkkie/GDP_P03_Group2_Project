@@ -257,9 +257,9 @@ public class CatState_DIE : CatState
 {
     protected CatStateName name = CatStateName.DIE;
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
-        base.EnterState(animator);
+        base.EnterState();
     }
 
     public override void ExitState()
@@ -268,7 +268,7 @@ public class CatState_DIE : CatState
     }
 
     #endregion
-    public CatState_DIE(Animator Animator, CatFSM fsm) : base(Animator, fsm)
+    public CatState_DIE(CatFSM fsm) : base(fsm)
     {
 
     }
