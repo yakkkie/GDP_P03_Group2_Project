@@ -16,6 +16,7 @@ public class CatFSM : FSM
     public CatState_JUMP CatState_JUMP;
     public CatState_EAT CatState_EAT;
     public CatState_DRINK CatState_DRINK;
+    public CatState_DIE catState_DIE;
 
     public Animator animator;
     public Cat cat;
@@ -31,6 +32,20 @@ public class CatFSM : FSM
     public void Update()
     {
         currentState.UpdateState();
+        switch (currentState)
+        {
+            case CatState_DIE:
+                ClearOtherAnimations();
+                // Handle other death-related actions
+                break;
+                // Other cases and state transitions...
+        }
+    }
+    void ClearOtherAnimations()
+    {
+        // Clear other animations or set parameters to stop ongoing animations
+        animator.SetBool("walkBool", false);
+        // Clear any other ongoing animations
     }
 
     public void FixedUpdate()

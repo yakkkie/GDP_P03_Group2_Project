@@ -104,8 +104,6 @@ public class Cat : MonoBehaviour, IConsume
 
     public IEnumerator HealthDrain()
     {
-        while(currentHealth > 0)
-        {
             float hungerInfluence = 1 / (currentHunger + 1);
             if (currentHunger / MaxHunger > 0.5)
                 hungerInfluence = 0;
@@ -118,7 +116,8 @@ public class Cat : MonoBehaviour, IConsume
             currentHealth -= healthDrain;
             currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
             yield return new WaitForSeconds(1);
-        }
+        
+
     }
 
     public void Consume(ConsumeType ct)
@@ -208,13 +207,21 @@ public class Cat : MonoBehaviour, IConsume
     #region Movement
     public void WalkRandomly()
     {
-        Vector3 targetDest = Random.insideUnitSphere * 3f;
-        targetDest += transform.position;
+        if (currentHealth > 0)
+        {
+            Vector3 targetDest = Random.insideUnitSphere * 3f;
+            targetDest += transform.position;
 
-        NavMeshHit hit;
-        NavMesh.SamplePosition(targetDest, out hit, 3f, 1);
-        MoveTowards(hit.position);
-        catFSM.ChangeState(catFSM.CatState_WALK);
+            NavMeshHit hit;
+            NavMesh.SamplePosition(targetDest, out hit, 3f, 1);
+            MoveTowards(hit.position);
+            catFSM.ChangeState(catFSM.CatState_WALK);
+        }
+        else
+        {
+            catFSM.Update();
+            animator.SetBool("healthZero", true);
+        }
     }
 
     public void MoveTowards(Vector3 target)
@@ -249,6 +256,7 @@ public class Cat : MonoBehaviour, IConsume
 
 
                 break;
+ 
         }
     }
 
@@ -293,6 +301,7 @@ public class Cat : MonoBehaviour, IConsume
         catStatuses.Add(CatStatusName.HUNGRY, hungry);
         catStatuses.Add(CatStatusName.THIRSTY, thirsty);
         catStatuses.Add(CatStatusName.SICK, sick);
+        
 
         currentRoamComplete = true;
     }
@@ -316,6 +325,7 @@ public class Cat : MonoBehaviour, IConsume
         IDLE,
         HUNGRY,
         THIRSTY,
-        SICK
+        SICK,
+ 
     }
 }
