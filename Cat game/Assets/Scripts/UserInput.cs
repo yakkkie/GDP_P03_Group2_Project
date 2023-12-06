@@ -8,7 +8,7 @@ public class UserInput : MonoBehaviour
     public GameObject waterBowl;
     public GameObject foodBowl;
 
-    public float startY = 0.12186f;
+    public float startY = 0.15186f;
 
 
     private Vector3 foodPos;
