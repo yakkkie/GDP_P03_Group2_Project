@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public Inventory inventory;
 
-     public UI_Inventory uiInventory;
+    public UI_Inventory uiInventory;
 
     private void Awake()
     {
@@ -15,34 +15,46 @@ public class Player : MonoBehaviour
     }
 
     private void UseItem(Item item)
+{
+    // Check if the item is the correct type before performing the action
+    if (IsValidItem(item))
     {
         switch (item.itemType)
         {
             case Item.ItemType.TierAFood:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.TierAFood, amount = 1});
-                break;
             case Item.ItemType.TierBFood:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.TierBFood, amount = 1});
-                break;
             case Item.ItemType.TierCFood:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.TierCFood, amount = 1});
                 break;
             case Item.ItemType.CockSpray:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.CockSpray, amount = 1});
+                // Handle Cockroach Spray
+                Debug.Log("Used Cockroach Spray!");
                 break;
             case Item.ItemType.ElectricSwat:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.ElectricSwat, amount = 1});
+                // Handle Electric Swat
                 break;
-            case Item.ItemType.InsectRepel:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.InsectRepel, amount = 1});
-                break;
-            case Item.ItemType.LizzoKiller:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.LizzoKiller, amount = 1});
-                break;
-            case Item.ItemType.Swatt:
-                inventory.RemoveItem(new Item {itemType = Item.ItemType.Swatt, amount = 1});
+            // ... handle other item types ...
+            default:
+                // Handle generic usage for other item types
+                Debug.Log($"Used {item.itemType}!");
                 break;
         }
+
+        // Remove the used item from the inventory
+        inventory.RemoveItem(item);
+    }
+    else
+    {
+        // Remove the used item from the inventory
+        inventory.RemoveItem(item);
+        Debug.Log("Item has been removed!");
+    }
+}
+
+    public static bool IsValidItem(Item item)
+    {
+        // Implement your logic to check if the item is valid for interaction
+        // For example, you can compare the item type or name
+        return item.itemType == Item.ItemType.CockSpray;
     }
 
 }
