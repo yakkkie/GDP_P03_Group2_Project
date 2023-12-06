@@ -4,6 +4,7 @@ public class UserInput : MonoBehaviour
 {
     public LayerMask clickableLayer;
     public GameObject water;
+    public GameObject food;
     public Camera camera;// This reference needs to be assigned in the Inspector
 
     void Update()
@@ -24,7 +25,12 @@ public class UserInput : MonoBehaviour
                     water.SetActive(true);
                 }
 
-                
+                if (clickedObject.CompareTag("Foodbowl"))
+                {
+                    //refill the water bowl :D
+                    food.SetActive(true);
+                }
+
             }
         }
     }
