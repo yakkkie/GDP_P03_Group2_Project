@@ -259,6 +259,7 @@ public class CatState_DIE : CatState
     #region State Method
     public override void EnterState()
     {
+        animator.SetBool("healthZero", true);
         base.EnterState();
     }
 

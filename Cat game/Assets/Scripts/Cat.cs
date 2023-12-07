@@ -51,7 +51,10 @@ public class Cat : MonoBehaviour, IConsume
     private void Update()
     {
         catFSM.Update();
-
+        if (currentHealth <= 0)
+        {
+            catFSM.ChangeState(catFSM.catState_DIE);
+        }
         if(timer > 3)
         {
             WalkRandomly();
