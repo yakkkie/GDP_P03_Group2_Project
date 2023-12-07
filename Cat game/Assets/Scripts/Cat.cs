@@ -28,6 +28,7 @@ public class Cat : MonoBehaviour, IConsume
     public CatStatusUIHandler uiHandler;
     public Transform foodBowlTrans;
     public Transform waterBowlTrans;
+    public GameObject LoseScreen;
 
 
     //store the cat status and its priority
@@ -46,6 +47,7 @@ public class Cat : MonoBehaviour, IConsume
 
         hungerDrainCor = StartCoroutine(HungerDrain());
         thirstDrainCor = StartCoroutine(ThirstDrain());
+        LoseScreen = GameObject.Find("Lose Screen");
     }
 
     private void Update()
@@ -54,6 +56,11 @@ public class Cat : MonoBehaviour, IConsume
         if (currentHealth <= 0)
         {
             catFSM.ChangeState(catFSM.catState_DIE);
+            LoseScreen.SetActive(true); 
+        }
+        else
+        {
+            LoseScreen.SetActive(false);
         }
         if(timer > 3)
         {
