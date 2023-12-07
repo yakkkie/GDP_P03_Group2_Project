@@ -78,7 +78,7 @@ public class BowlConsume : MonoBehaviour
         isCollided = false;
 
 
-        if (transform.position.y < 0.102f)
+        if (transform.position.y < 0.02)
         {
             this.gameObject.SetActive(false);
         }

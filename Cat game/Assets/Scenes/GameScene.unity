@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -729,6 +729,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FOOD
       objectReference: {fileID: 0}
+    - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5874404727940277197, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -853,6 +857,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_Name
       value: bowl02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
+      propertyPath: m_TagString
+      value: Foodbowl
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1096,6 +1108,10 @@ PrefabInstance:
     - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_Name
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6290537755513090816, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1379,7 +1395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627d8722f35b8c548b5db840322a0759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabToInstantiate: {fileID: 0}
+  PrefabToInstantiate: {fileID: 1662620793}
   UIDragElement: {fileID: 858286875}
   Canvas: {fileID: 2000346176}
   clickableLayer:
@@ -1417,11 +1433,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickableLayer:
     serializedVersion: 2
-    m_Bits: 72
-  water: {fileID: 0}
-  food: {fileID: 0}
-  waterBowl: {fileID: 0}
-  foodBowl: {fileID: 0}
+    m_Bits: 64
+  water: {fileID: 810971157}
+  food: {fileID: 1926958083}
+  waterBowl: {fileID: 417685719}
+  foodBowl: {fileID: 1172158678}
   startY: 0.15
   camera: {fileID: 1414176679}
   placedWater: 0
@@ -1689,7 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627d8722f35b8c548b5db840322a0759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PrefabToInstantiate: {fileID: 0}
+  PrefabToInstantiate: {fileID: 930119708}
   UIDragElement: {fileID: 1818214652}
   Canvas: {fileID: 2000346176}
   clickableLayer:
@@ -1894,8 +1910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67fc5dfb81e9bb347acbf52eea70e071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusOffset: {x: 0, y: 0, z: 0}
-  StatusTransform: {fileID: 0}
+  StatusOffset: {x: 0, y: 450, z: 0}
+  StatusTransform: {fileID: 358839322}
   healthBar: {fileID: 1876844620}
   hungerBar: {fileID: 51556942}
   thirstBar: {fileID: 2080629591}
@@ -2499,11 +2515,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ct: 1
   bowl: {fileID: 417685719}
-  decreaseValue: 0.1
+  decreaseValue: 0.02
   scalingSpeed: 0.1
   animationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0110728275
+      value: 0.00020892154
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.016852265
+      value: 0.2611602
+      inSlope: 2.3434699
+      outSlope: 2.3434699
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.38747525
+    - serializedVersion: 3
+      time: 0.06851125
+      value: 0.34373778
+      inSlope: 2.234375
+      outSlope: 2.234375
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.99834687
+      outWeight: 0.22952415
+    - serializedVersion: 3
+      time: 0.10018315
+      value: 0.40054637
+      inSlope: 0.5378183
+      outSlope: 0.5378183
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -4142,7 +4194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1662620794
 Transform:
   m_ObjectHideFlags: 0
@@ -4171,6 +4223,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_Name
       value: bowl02
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
+      propertyPath: m_TagString
+      value: Waterbowl
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_LocalPosition.x

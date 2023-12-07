@@ -45,34 +45,13 @@ public class UserInput : MonoBehaviour
 
                 if (clickedObject.CompareTag("Waterbowl"))
                 {
-                    if (!placedWater)
-                    {
-                        //refill the water bowl :D
-                        SetLocation(waterString);
-                        placedWater = true;
+                    ResetLocation(waterString);
 
-                    }
-                    else
-                    {
-                        ResetLocation(waterString);
-                        placedWater = false;
-                    }
-                    
                 }
 
                 if (clickedObject.CompareTag("Foodbowl"))
                 {
-                    if (!placedFood)
-                    {
-                        //refill the water bowl :D
-                        SetLocation(foodString);
-                        placedFood = true;
-                    }
-                    else
-                    {
-                        ResetLocation(foodString);
-                        placedFood = false;
-                    }
+                    ResetLocation(foodString);
                 }
 
                 
