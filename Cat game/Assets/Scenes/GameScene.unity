@@ -3073,8 +3073,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d67b41d58e19f94ab35414a0fa406ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StopSpawning: 0
+  spawnTime: 0
+  spawnDelay: 0
   mosquitoSpawn_1: {fileID: 0}
-  cockroachSpawn_1: {fileID: 0}
+  cockroachSpawn_1: {fileID: 919132149155446097, guid: d34f80b574211bb428dfdf6fe084683c, type: 3}
   mosquitoSpawn_2: {fileID: 0}
   cockroachSpawn_2: {fileID: 0}
 --- !u!4 &1056360362
