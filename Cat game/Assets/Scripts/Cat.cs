@@ -10,6 +10,7 @@ public class Cat : MonoBehaviour, IConsume
     float timer;
     float timing;
     bool currentRoamComplete;
+    bool isDead;
 
     #region Stats
     public float MaxHealth;
@@ -43,7 +44,7 @@ public class Cat : MonoBehaviour, IConsume
     void Start()
     {
         Initialize();
-
+        isDead = false;
         hungerDrainCor = StartCoroutine(HungerDrain());
         thirstDrainCor = StartCoroutine(ThirstDrain());
     }
@@ -52,7 +53,7 @@ public class Cat : MonoBehaviour, IConsume
     {
         catFSM.Update();
 
-        if(timer > 3)
+        if(timer > 3 && !isDead)
         {
             WalkRandomly();
             timer = 0;
