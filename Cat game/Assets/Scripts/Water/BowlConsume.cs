@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BowlConsume : MonoBehaviour
 {
+    public ConsumeType ct;
     public GameObject bowl; // Reference to the bowl object
     public float decreaseValue = 0.1f; // Speed of y-position decrease
     public float scalingSpeed = 0.1f; // Speed of scaling
@@ -10,7 +11,7 @@ public class BowlConsume : MonoBehaviour
     private Vector3 originalPosition;
     private bool isCollided = false;
     public AnimationCurve animationCurve;
-
+    Cat cat;
     private void Start()
     {
         originalScale = transform.localScale;
@@ -21,12 +22,7 @@ public class BowlConsume : MonoBehaviour
     {
         if (isCollided && transform.position.y > bowl.transform.position.y)
         {
-            // Decrease y-position
-            transform.position -= Vector3.up * decreaseValue ;
-            Debug.Log(transform.position.y);
-            // Adjust scaling to fit within the bowl
-            FitInsideBowl();
-            Debug.Log("COLLIDED :D:D:D:D::D");
+            Decrease();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -36,7 +32,6 @@ public class BowlConsume : MonoBehaviour
             Debug.Log(transform.position.y);
             // Adjust scaling to fit within the bowl
             FitInsideBowl();
-            Debug.Log("COLLIDED :D:D:D:D::D");
         }
     }
 
@@ -44,7 +39,17 @@ public class BowlConsume : MonoBehaviour
     {
         if (other.CompareTag("Cat"))
         {
-            isCollided = true;
+            cat = other.GetComponent<Cat>();
+            isCollided = true;           
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Cat"))
+        {
+            cat = null;
+            isCollided = false;
         }
     }
 
@@ -78,6 +83,28 @@ public class BowlConsume : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+
+    public void Decrease()
+    {
+        // Decrease y-position
+        transform.position -= Vector3.up * decreaseValue;
+        Debug.Log(transform.position.y);
+
+        // Adjust scaling to fit within the bowl
+        FitInsideBowl();
+        cat.Consume(this.ct);
+    }
+}
+
+public enum ConsumeType
+{
+    FOOD,
+    WATER
+}
+
+public interface IConsume
+{
+    void Consume(ConsumeType ct);
 }
 
 

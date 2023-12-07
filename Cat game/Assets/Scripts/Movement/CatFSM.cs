@@ -15,29 +15,54 @@ public class CatFSM : FSM
     public CatState_WALK CatState_WALK;
     public CatState_JUMP CatState_JUMP;
     public CatState_EAT CatState_EAT;
-    public CatState_DRINK catState_Drink;
+    public CatState_DRINK CatState_DRINK;
+    public CatState_DIE catState_DIE;
 
     public Animator animator;
-
+    public Cat cat;
+    public NavMeshAgent agent;
     public void ChangeState(CatState nextState)
     {
         currentState.ExitState();
 
         currentState = nextState;
-        currentState.EnterState(animator);   
+        currentState.EnterState();   
     }
 
     public void Update()
     {
         currentState.UpdateState();
+        switch (currentState)
+        {
+            case CatState_DIE:
+                ClearOtherAnimations();
+                // Handle other death-related actions
+                break;
+                // Other cases and state transitions...
+        }
+    }
+    void ClearOtherAnimations()
+    {
+        // Clear other animations or set parameters to stop ongoing animations
+        animator.SetBool("walkBool", false);
+        // Clear any other ongoing animations
     }
 
-    public CatFSM(Animator Animator, NavMeshAgent Agent)
+    public void FixedUpdate()
+    {
+        currentState.FixedUpdateState();
+    }
+
+    public CatFSM(Animator Animator, NavMeshAgent Agent,Cat Cat)
     {
         animator = Animator;
-
-        CatState_WALK = new(Animator,this,Agent);
-        CatState_IDLE = new(Animator,this);
+        agent = Agent;
+        cat = Cat;
+        CatState_WALK = new(this);
+        CatState_IDLE = new(this);
+        CatState_EAT = new(this);
+        CatState_DRINK = new(this);
+        catState_DIE = new(this);
 
         currentState = CatState_IDLE;
     }

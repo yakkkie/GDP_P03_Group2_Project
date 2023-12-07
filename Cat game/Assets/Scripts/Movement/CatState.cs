@@ -8,11 +8,12 @@ public class CatState : State
 {
     public Animator animator;
     public CatFSM fsm;
-
+    public Cat cat;
+    
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
-        base.EnterState(animator);
+        base.EnterState();
     }
 
     public override void ExitState()
@@ -31,9 +32,10 @@ public class CatState : State
     }
     #endregion
 
-    public CatState(Animator Animator,CatFSM fsm)
+    public CatState(CatFSM fsm)
     {
-        animator = Animator;
+        animator = fsm.animator;
+        cat = fsm.cat;
         this.fsm = fsm;
     }
 }
@@ -43,17 +45,15 @@ public class CatState_IDLE : CatState
     protected CatStateName stateName = CatStateName.IDLE;
 
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
         animator.SetBool("walkBool", false);
-        Debug.Log("IDLE_ENTER");
 
-        base.EnterState(animator);
+        base.EnterState();
     }
 
     public override void ExitState()
     {
-        Debug.Log("IDLE_EXIT");
         base.ExitState();
     }
 
@@ -69,7 +69,7 @@ public class CatState_IDLE : CatState
     }
     #endregion
 
-    public CatState_IDLE(Animator Animator, CatFSM fsm) : base(Animator,fsm)
+    public CatState_IDLE(CatFSM fsm) : base(fsm)
     {
 
     }
@@ -78,10 +78,9 @@ public class CatState_IDLE : CatState
 public class CatState_WALK : CatState
 {
     protected CatStateName stateName = CatStateName.WALK;
-    public NavMeshAgent agent;
 
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
         animator.SetBool("walkBool", true);
      
@@ -94,7 +93,7 @@ public class CatState_WALK : CatState
 
     public override void UpdateState()
     {
-        if (agent.velocity.magnitude <= 0)
+        if (fsm.agent.velocity.magnitude <= 0)
             fsm.ChangeState(fsm.CatState_IDLE);
             
     }
@@ -109,9 +108,9 @@ public class CatState_WALK : CatState
 
     }
 
-    public CatState_WALK(Animator Animator, CatFSM fsm, NavMeshAgent Agent) : base(Animator, fsm)
+    public CatState_WALK(CatFSM fsm) : base(fsm)
     {
-        agent = Agent;
+
     }
     #endregion
 }
@@ -121,9 +120,9 @@ public class CatState_JUMP : CatState
     protected CatStateName stateName = CatStateName.JUMP;
 
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
-        base.EnterState(animator);
+        base.EnterState();
     }
 
     public override void ExitState()
@@ -142,7 +141,7 @@ public class CatState_JUMP : CatState
     }
     #endregion
 
-    public CatState_JUMP (Animator Animator, CatFSM fsm) : base(Animator, fsm)
+    public CatState_JUMP (CatFSM fsm) : base(fsm)
     {
 
     }
@@ -151,11 +150,15 @@ public class CatState_JUMP : CatState
 public class CatState_EAT : CatState
 {
     protected CatStateName stateName = CatStateName.EAT;
+    bool isEating;
+    float timer = 0;
 
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
-        base.EnterState(animator);
+        isEating = true;
+        Debug.Log("EATING");
+        base.EnterState();
     }
 
     public override void ExitState()
@@ -165,16 +168,34 @@ public class CatState_EAT : CatState
 
     public override void UpdateState()
     {
+        if(timer > 0.2)
+        {
+            cat.currentHunger = Mathf.Clamp(cat.currentHunger += 15, 0, cat.MaxHunger);
+
+            timer = 0;
+        }
+
+        if(cat.currentHunger/cat.MaxHunger > 1)
+        {
+            isEating = false;
+        }
+
+        if (!isEating)
+            fsm.ChangeState(fsm.CatState_IDLE);
+
         base.UpdateState();
     }
 
     public override void FixedUpdateState()
     {
+
+
+        timer += Time.fixedDeltaTime;
         base.FixedUpdateState();
     }
     #endregion
 
-    public CatState_EAT(Animator Animator, CatFSM fsm) : base(Animator, fsm)
+    public CatState_EAT(CatFSM fsm) : base(fsm)
     {
 
     }
@@ -183,11 +204,15 @@ public class CatState_EAT : CatState
 public class CatState_DRINK : CatState
 {
     protected CatStateName stateName = CatStateName.DRINK;
+    bool isDrinking = false;
+    float timer = 0;
 
     #region State Method
-    public override void EnterState(Animator animator)
+    public override void EnterState()
     {
-        base.EnterState(animator);
+        isDrinking = true;
+        Debug.Log("DRINKING");
+        base.EnterState();
     }
 
     public override void ExitState()
@@ -197,20 +222,58 @@ public class CatState_DRINK : CatState
 
     public override void UpdateState()
     {
+        if (timer > 0.2)
+        {
+
+            cat.currentThirst = Mathf.Clamp(cat.currentThirst += 15, 0, cat.MaxThirst);
+            timer = 0;
+        }
+
+        if (cat.currentThirst / cat.MaxThirst > 1)
+        {
+            isDrinking = false;
+        }
+
+        if (!isDrinking)
+            fsm.ChangeState(fsm.CatState_IDLE);
+
         base.UpdateState();
     }
 
     public override void FixedUpdateState()
     {
+        timer += Time.fixedDeltaTime;
         base.FixedUpdateState();
     }
     #endregion
 
-    public CatState_DRINK(Animator Animator, CatFSM fsm) : base(Animator, fsm)
+    public CatState_DRINK(CatFSM fsm) : base(fsm)
     {
 
     }
 }
+
+public class CatState_DIE : CatState
+{
+    protected CatStateName name = CatStateName.DIE;
+    #region State Method
+    public override void EnterState()
+    {
+        base.EnterState();
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+    }
+
+    #endregion
+    public CatState_DIE(CatFSM fsm) : base(fsm)
+    {
+
+    }
+}
+
 
 public enum CatStateName //representation of all the cat states
 {
@@ -219,4 +282,5 @@ public enum CatStateName //representation of all the cat states
     JUMP,
     EAT,
     DRINK,
+    DIE,
 }
