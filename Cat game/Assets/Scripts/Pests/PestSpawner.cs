@@ -3,11 +3,6 @@ using System.Collections;
 
 public class PestSpawner : MonoBehaviour
 {
-
-    public bool StopSpawning = false;
-    public float spawnTime;
-    public float spawnDelay;
-
     public GameObject mosquitoSpawn_1;
     public GameObject cockroachSpawn_1;
     public GameObject mosquitoSpawn_2;
@@ -15,20 +10,11 @@ public class PestSpawner : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("SpawnObject", spawnTime, spawnDelay);
-
         StartCoroutine(ActivateSpawns());
         mosquitoSpawn_1.SetActive(true);
         cockroachSpawn_2.SetActive(true);
         mosquitoSpawn_2.SetActive(true);
         cockroachSpawn_1.SetActive(true);
-    }
-
-    public void SpawnObject()
-    {
-        Instantiate(ActivateSpawns(), transform.position,transform.rotation);
-
-        CancelInvoke("SpawnObject");
     }
 
     IEnumerator ActivateSpawns()
