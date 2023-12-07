@@ -105,6 +105,8 @@ public class Cat : MonoBehaviour, IConsume
 
     public IEnumerator HealthDrain()
     {
+        while (currentHealth > 0)
+        {
             float hungerInfluence = 1 / (currentHunger + 1);
             if (currentHunger / MaxHunger > 0.5)
                 hungerInfluence = 0;
@@ -113,12 +115,13 @@ public class Cat : MonoBehaviour, IConsume
             if (currentThirst / MaxThirst > 0.5)
                 thirstInfluence = 0;
 
-            float healthDrain = hungerInfluence + thirstInfluence;
+            float healthDrain = (hungerInfluence + thirstInfluence);
+
             currentHealth -= healthDrain;
             currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
+            Debug.Log("health draining...");
             yield return new WaitForSeconds(1);
-        
-
+        }
     }
 
     public void Consume(ConsumeType ct)
