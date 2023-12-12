@@ -11,15 +11,10 @@ public class PestSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(ActivateSpawns());
-        mosquitoSpawn_1.SetActive(true);
-        cockroachSpawn_2.SetActive(true);
-        mosquitoSpawn_2.SetActive(true);
-        cockroachSpawn_1.SetActive(true);
     }
 
     IEnumerator ActivateSpawns()
     {
-
         yield return new WaitForSeconds(10f); // Wait for 10 seconds
 
         // Activate Mosquito spawn_1 and Cockroach spawn_2
@@ -33,5 +28,3 @@ public class PestSpawner : MonoBehaviour
         cockroachSpawn_1.SetActive(true);
     }
 }
-
-
