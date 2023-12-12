@@ -8,23 +8,44 @@ public class PestSpawner : MonoBehaviour
     public GameObject mosquitoSpawn_2;
     public GameObject cockroachSpawn_2;
 
+    private bool bowlLeftOut;
+    private float timeLeftOut;
+
     void Start()
     {
-        StartCoroutine(ActivateSpawns());
+        bowlLeftOut = false;
+        timeLeftOut = 0f;
     }
 
-    IEnumerator ActivateSpawns()
+    void Update()
     {
-        yield return new WaitForSeconds(10f); // Wait for 10 seconds
+        if (bowlLeftOut)
+        {
+            timeLeftOut += Time.deltaTime;
 
+            // Check if the bowl has been left out for 30 minutes
+            if (timeLeftOut >= 1800f) // 1800 seconds = 30 minutes
+            {
+                SpawnPests();
+                bowlLeftOut = false; // Reset the timer
+            }
+        }
+    }
+
+    void SpawnPests()
+    {
         // Activate Mosquito spawn_1 and Cockroach spawn_2
         mosquitoSpawn_1.SetActive(true);
         cockroachSpawn_2.SetActive(true);
 
-        yield return new WaitForSeconds(5f); // Wait for 5 seconds
-
         // Activate Mosquito spawn_2 and Cockroach spawn_1
         mosquitoSpawn_2.SetActive(true);
         cockroachSpawn_1.SetActive(true);
+    }
+
+    // Call this method when the bowl is left out
+    public void BowlLeftOut()
+    {
+        bowlLeftOut = true;
     }
 }
