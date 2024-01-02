@@ -698,16 +698,8 @@ PrefabInstance:
       value: FOOD
       objectReference: {fileID: 0}
     - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5874404727940277197, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -771,7 +763,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1926958090}
+      addedObject: {fileID: 1926958086}
+    - targetCorrespondingSourceObject: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1926958085}
   m_SourcePrefab: {fileID: 100100000, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
 --- !u!1 &336394672
 GameObject:
@@ -832,10 +827,6 @@ PrefabInstance:
       value: bowl02 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -886,10 +877,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1172158682}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
 --- !u!1 &358839321
 GameObject:
@@ -980,28 +968,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
   m_PrefabInstance: {fileID: 1729762659}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &417685723
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417685719}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
 --- !u!1001 &473128169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1112,16 +1078,8 @@ PrefabInstance:
       value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 277251578377970225, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6290537755513090816, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
       propertyPath: m_LocalScale.x
@@ -1446,9 +1404,9 @@ MonoBehaviour:
     m_Bits: 64
   water: {fileID: 810971157}
   food: {fileID: 1926958083}
-  waterBowl: {fileID: 930119708}
-  foodBowl: {fileID: 1662620793}
-  startY: 0.096
+  waterBowl: {fileID: 417685719}
+  foodBowl: {fileID: 1172158678}
+  startY: 0.15
   camera: {fileID: 1414176679}
   placedWater: 0
   placedFood: 0
@@ -2399,13 +2357,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930119709}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WATERBOWL
-  m_TagString: Waterbowl
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &930119709
 Transform:
   m_ObjectHideFlags: 0
@@ -2831,28 +2789,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
   m_PrefabInstance: {fileID: 350053894}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1172158682
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172158678}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
 --- !u!1 &1361648321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,6 +3029,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swipeRotationSpeed: 10
+  minRotationY: 0
+  maxRotationY: 360
 --- !u!1 &1440753577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3427,9 +3365,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1662620794}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FOODBOWL
-  m_TagString: Foodbowl
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3462,10 +3400,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_Name
       value: bowl02
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
       propertyPath: m_IsActive
@@ -3518,10 +3452,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 417685723}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abe0f3cb09164c048b3cba749efab044, type: 3}
 --- !u!1 &1791530091
 GameObject:
@@ -3934,7 +3865,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6290537755513090816, guid: 26316bc6a74d01e46bacf5d6f152b7ca, type: 3}
   m_PrefabInstance: {fileID: 326541982}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1926958090
+--- !u!114 &1926958085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3948,47 +3879,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ct: 0
   bowl: {fileID: 1172158678}
-  decreaseValue: 0.02
+  decreaseValue: 0.1
   scalingSpeed: 0.1
   animationCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0110728275
-      value: 0.00020892154
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.05466151
-      value: 0.15978214
-      inSlope: 2.234375
-      outSlope: 2.234375
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.99834687
-      outWeight: 0.22952415
-    - serializedVersion: 3
-      time: 0.11484655
-      value: 0.25676858
-      inSlope: 0.74795806
-      outSlope: 0.74795806
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.16203167
-      value: 0.37914625
-      inSlope: 0.5378183
-      outSlope: 0.5378183
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1926958086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926958083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4881c841f0e9e499a957b09c1347d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decreaseValue: 0.1
+  bowl: {fileID: 0}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

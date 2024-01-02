@@ -6,8 +6,8 @@ public class CameraMovementController : MonoBehaviour
 {
     public float swipeRotationSpeed = 2.0f;
     private float rotationSmoothness = 5.0f;
-    private float minRotationY = -64f;   // Set minimum Y rotation limit
-    private float maxRotationY = -28f;   // Set maximum Y rotation limit
+    private float minRotationY = -64f;   // Set your minimum Y rotation limit
+    private float maxRotationY = -28f;   // Set your maximum Y rotation limit
 
     private Vector2 touchStartPos;
     private bool isSwiping = false;
