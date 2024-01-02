@@ -74,11 +74,12 @@ public class BowlConsume : MonoBehaviour
         localScale.x = animationCurve.Evaluate(transform.position.y);
         localScale.z = animationCurve.Evaluate(transform.position.y);
 
+        Debug.Log(transform.position.y);
         transform.localScale = localScale;
         isCollided = false;
 
 
-        if (transform.position.y < 0.102f)
+        if (transform.position.y < 0.02f)
         {
             this.gameObject.SetActive(false);
         }
