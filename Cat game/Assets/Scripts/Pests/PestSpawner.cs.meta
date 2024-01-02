@@ -3,7 +3,11 @@ guid: 0d67b41d58e19f94ab35414a0fa406ad
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mosquitoSpawn_1: {fileID: 919132149155446097, guid: fa669487c986f5741a9f3199eb76d9ba, type: 3}
+  - cockroachSpawn_1: {instanceID: 0}
+  - mosquitoSpawn_2: {instanceID: 0}
+  - cockroachSpawn_2: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
