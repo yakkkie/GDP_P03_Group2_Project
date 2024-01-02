@@ -14,9 +14,6 @@ namespace FiniteStateMachine
         public virtual void EnterState()
         {
         }
-        public virtual void EnterState(Animator animator)
-        {
-        }
 
         public virtual void ExitState()
         {

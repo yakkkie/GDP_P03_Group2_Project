@@ -22,7 +22,7 @@ public class MouseFSM : FSM
         currentState.ExitState();
 
         currentState = nextState;
-        currentState.EnterState(animator);
+        currentState.EnterState();
     }
 
     public void Update()
