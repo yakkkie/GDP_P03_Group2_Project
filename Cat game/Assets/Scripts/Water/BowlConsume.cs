@@ -12,6 +12,7 @@ public class BowlConsume : MonoBehaviour
     private bool isCollided = false;
     public AnimationCurve animationCurve;
     Cat cat;
+
     private void Start()
     {
         originalScale = transform.localScale;
