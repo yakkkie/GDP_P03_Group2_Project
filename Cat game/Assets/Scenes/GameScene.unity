@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 11576385}
   - component: {fileID: 11576384}
   m_Layer: 0
-  m_Name: CatFood Inventory Button
+  m_Name: Food Inventory Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
