@@ -8,7 +8,7 @@ public class UserInput : MonoBehaviour
     public GameObject waterBowl;
     public GameObject foodBowl;
 
-    public float startY = 0.15186f;
+    public float startY = 0.096f;
 
 
     private Vector3 foodPos;
@@ -37,11 +37,13 @@ public class UserInput : MonoBehaviour
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
            
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickableLayer))
+            if (Physics.Raycast(ray, out hit, 30f, clickableLayer))
             {
 
-
+                
                 GameObject clickedObject = hit.collider.gameObject;
+
+                Debug.Log(clickedObject.tag);
 
                 if (clickedObject.CompareTag("Waterbowl"))
                 {
@@ -67,16 +69,18 @@ public class UserInput : MonoBehaviour
         {
             foodBowl.SetActive(false);
             foodBowl.transform.position = Vector3.zero;
-            food.SetActive(false);
-            food.transform.position = Vector3.zero;
+            
+            Vector3 foodPos = new(0,startY,0);
+            food.transform.position = foodPos;
         }
 
         if (S == "water")
         {
             waterBowl.SetActive(false);
             waterBowl.transform.position = Vector3.zero;
-            water.SetActive(false);
-            water.transform.position = Vector3.zero;
+            
+            Vector3 waterPos = new(0, startY, 0);
+            water.transform.position = waterPos;
         }
     }
 
@@ -100,6 +104,11 @@ public class UserInput : MonoBehaviour
 
             water.SetActive(true);
         }
+    }
+
+    private void clearBowls(string S)
+    {
+
     }
 
 }
