@@ -10,6 +10,7 @@ public class EnvironmentHandler : MonoBehaviour
     public float curDirtiness;
 
     public GameObject dirtPrefab;
+    public List<GameObject> prefabs;
     public Dictionary<DirtyType, float> dirtValues;
     List<Dirt> dirtOnMap = new();
 
@@ -42,8 +43,9 @@ public class EnvironmentHandler : MonoBehaviour
         Vector3 randPos = new( Random.insideUnitCircle.x,0,Random.insideUnitCircle.y);
         randPos += transform.position;
         //bool fit = NavMesh.SamplePosition(randPos, out NavMeshHit hit, 2, 0);
-
-        Instantiate(dirtPrefab, randPos, Quaternion.identity);
+        int index = Random.Range(0, prefabs.Count);
+        GameObject prefab = prefabs[index];
+        Instantiate(prefab, randPos, Quaternion.identity);
     }
 
     void CheckDirtiness()
