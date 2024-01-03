@@ -14,6 +14,9 @@ public class PestSpawner : MonoBehaviour
     public float spawnTime = 1800f; // Time in seconds (30 minutes)
     public float initialSpawnDelay = 10f; // Delay before pests start spawning
 
+    public BowlConsume waterbowl;
+    public BowlConsume foodbowl;
+
     void Start()
     {
         bowlLeftOut = false;
@@ -25,13 +28,17 @@ public class PestSpawner : MonoBehaviour
 
     void Update()
     {
+        BowlLeftOut();
+        
         // Check if the bowl has been left out
         if (bowlLeftOut && spawnCoroutine == null)
         {
             spawnCoroutine = StartCoroutine(ActivateSpawns());
+            Debug.Log("COCK");
         }
     }
 
+ 
     IEnumerator ActivateSpawns()
     {
         // Delay before pests start spawning
@@ -68,7 +75,8 @@ public class PestSpawner : MonoBehaviour
     // Call this method when the bowl is left out
     public void BowlLeftOut()
     {
-        bowlLeftOut = true;
+        if(waterbowl.gameObject.active || foodbowl.gameObject.active)
+            bowlLeftOut = true;
     }
 
     // Call this method to cancel the spawning if the bowl is no longer left out
