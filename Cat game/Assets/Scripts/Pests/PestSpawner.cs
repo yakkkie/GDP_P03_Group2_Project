@@ -38,24 +38,28 @@ public class PestSpawner : MonoBehaviour
         }
     }
 
- 
+
     IEnumerator ActivateSpawns()
     {
         // Delay before pests start spawning
         yield return new WaitForSeconds(initialSpawnDelay);
 
-        // Activate Mosquito spawn_1 and Cockroach spawn_2
-        mosquitoSpawn_1.SetActive(true);
-        cockroachSpawn_2.SetActive(true);
+        // Instantiate Mosquito spawn_1 and Mosquito spawn_2
+        GameObject mosquito1 = Instantiate(mosquitoSpawn_1, transform.position, Quaternion.identity);
+        GameObject mosquito2 = Instantiate(mosquitoSpawn_2, transform.position, Quaternion.identity);
 
-        // Activate Mosquito spawn_2 and Cockroach spawn_1
-        mosquitoSpawn_2.SetActive(true);
-        cockroachSpawn_1.SetActive(true);
+        // Instantiate Cockroach spawn_1 and Cockroach spawn_2
+        GameObject cockroach1 = Instantiate(cockroachSpawn_1, transform.position, Quaternion.identity);
+        GameObject cockroach2 = Instantiate(cockroachSpawn_2, transform.position, Quaternion.identity);
 
+        // Wait for spawnTime
         yield return new WaitForSeconds(spawnTime);
 
         // Deactivate pests after spawning time
-        DeactivatePests();
+        Destroy(mosquito1);
+        Destroy(cockroach2);
+        Destroy(mosquito2);
+        Destroy(cockroach1);
 
         // Reset the bowlLeftOut code to false
         bowlLeftOut = false;
