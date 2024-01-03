@@ -4,8 +4,8 @@ using System.Collections;
 public class PestSpawner : MonoBehaviour
 {
     public GameObject mosquitoSpawn_1;
-    public GameObject cockroachSpawn_1;
     public GameObject mosquitoSpawn_2;
+    public GameObject cockroachSpawn_1;
     public GameObject cockroachSpawn_2;
 
     private bool bowlLeftOut;
@@ -57,9 +57,9 @@ public class PestSpawner : MonoBehaviour
 
         // Deactivate pests after spawning time
         Destroy(mosquito1);
-        Destroy(cockroach2);
         Destroy(mosquito2);
         Destroy(cockroach1);
+        Destroy(cockroach2);
 
         // Reset the bowlLeftOut code to false
         bowlLeftOut = false;
