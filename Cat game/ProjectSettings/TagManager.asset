@@ -8,6 +8,7 @@ TagManager:
   - Waterbowl
   - Foodbowl
   - Dirt
+  - Pest
   layers:
   - Default
   - TransparentFX

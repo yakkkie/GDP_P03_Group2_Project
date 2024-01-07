@@ -4,8 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - mosquitoSpawn_1: {fileID: 919132149155446097, guid: fa669487c986f5741a9f3199eb76d9ba, type: 3}
-  - cockroachSpawn_1: {instanceID: 0}
+  - mosquitoSpawn_1: {instanceID: 0}
+  - cockroachSpawn_1: {fileID: 919132149155446097, guid: d34f80b574211bb428dfdf6fe084683c, type: 3}
   - mosquitoSpawn_2: {instanceID: 0}
   - cockroachSpawn_2: {instanceID: 0}
   executionOrder: 0
