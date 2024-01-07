@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class EnvironmentHandler : MonoBehaviour
 {
     public Image dirtyBar;
+    public Image cleanBar;
     public float maxDirtiness;
     public float curDirtiness;
+    private float offsetAmount = 0.1f;
 
     public GameObject dirtPrefab;
     public List<GameObject> prefabs;
@@ -27,16 +29,23 @@ public class EnvironmentHandler : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         CheckDirtiness();
         UpdateDirtyBar();
     }
-
     void UpdateDirtyBar()
     {
         dirtyBar.fillAmount = curDirtiness / maxDirtiness;
     }
+
+    public void AdjustDirtiness()
+    {
+        float currentFillAmount = curDirtiness / maxDirtiness;
+        dirtyBar.fillAmount = Mathf.Clamp(currentFillAmount - offsetAmount, 0f, 1f);
+    }
+
+
 
     void SpawnDirt()
     {
