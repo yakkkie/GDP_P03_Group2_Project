@@ -3,10 +3,8 @@ using System.Collections;
 
 public class PestSpawner : MonoBehaviour
 {
-    public GameObject mosquitoSpawn_1;
-    public GameObject mosquitoSpawn_2;
-    public GameObject cockroachSpawn_1;
-    public GameObject cockroachSpawn_2;
+    public GameObject[] pestPrefabs;
+    
 
     private bool bowlLeftOut;
     private Coroutine spawnCoroutine;
@@ -14,16 +12,17 @@ public class PestSpawner : MonoBehaviour
     public float spawnTime = 1800f; // Time in seconds (30 minutes)
     public float initialSpawnDelay = 10f; // Delay before pests start spawning
 
-    public BowlConsume waterbowl;
-    public BowlConsume foodbowl;
+    public GameObject waterbowl;
+    public GameObject foodbowl;
 
     void Start()
     {
         bowlLeftOut = false;
         spawnCoroutine = null;
 
-        // Deactivate pests
-        DeactivatePests();
+        Debug.Log(pestPrefabs.Length);
+       
+       
     }
 
     void Update()
@@ -44,22 +43,13 @@ public class PestSpawner : MonoBehaviour
         // Delay before pests start spawning
         yield return new WaitForSeconds(initialSpawnDelay);
 
-        // Instantiate Mosquito spawn_1 and Mosquito spawn_2
-        GameObject mosquito1 = Instantiate(mosquitoSpawn_1, transform.position, Quaternion.identity);
-        GameObject mosquito2 = Instantiate(mosquitoSpawn_2, transform.position, Quaternion.identity);
-
-        // Instantiate Cockroach spawn_1 and Cockroach spawn_2
-        GameObject cockroach1 = Instantiate(cockroachSpawn_1, transform.position, Quaternion.identity);
-        GameObject cockroach2 = Instantiate(cockroachSpawn_2, transform.position, Quaternion.identity);
+        SpawnPests();
 
         // Wait for spawnTime
         yield return new WaitForSeconds(spawnTime);
 
         // Deactivate pests after spawning time
-        Destroy(mosquito1);
-        Destroy(mosquito2);
-        Destroy(cockroach1);
-        Destroy(cockroach2);
+        
 
         // Reset the bowlLeftOut code to false
         bowlLeftOut = false;
@@ -67,19 +57,10 @@ public class PestSpawner : MonoBehaviour
         spawnCoroutine = null; // Reset the coroutine to null
     }
 
-    // Deactivate all pests
-    void DeactivatePests()
-    {
-        mosquitoSpawn_1.SetActive(false);
-        cockroachSpawn_1.SetActive(false);
-        mosquitoSpawn_2.SetActive(false);
-        cockroachSpawn_2.SetActive(false);
-    }
-
     // Call this method when the bowl is left out
     public void BowlLeftOut()
     {
-        if(waterbowl.gameObject.active || foodbowl.gameObject.active)
+        if(waterbowl.activeInHierarchy || foodbowl.activeInHierarchy)
             bowlLeftOut = true;
     }
 
@@ -92,7 +73,20 @@ public class PestSpawner : MonoBehaviour
             StopCoroutine(spawnCoroutine);
             spawnCoroutine = null;
             // Deactivate pests if the coroutine is stopped early
-            DeactivatePests();
+            
+            
         }
     }
+
+    void SpawnPests()
+    {
+        Vector3 randPos = new(Random.insideUnitCircle.x, 0, Random.insideUnitCircle.y);
+        randPos += transform.position;
+        //bool fit = NavMesh.SamplePosition(randPos, out NavMeshHit hit, 2, 0);
+        int index = Random.Range(0, pestPrefabs.Length);
+        
+        GameObject prefab = pestPrefabs[index];
+        Instantiate(prefab, randPos, Quaternion.identity);
+    }
+
 }
