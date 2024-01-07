@@ -7,6 +7,7 @@ public class UserInput : MonoBehaviour
     public GameObject food;
     public GameObject waterBowl;
     public GameObject foodBowl;
+    public GameObject Dirt;
 
     public float startY = 0.096f;
 
@@ -17,6 +18,8 @@ public class UserInput : MonoBehaviour
 
     private string foodString = "food";
     private string waterString = "water";
+    private string dirtString = "Dirt";
+    private EnvironmentHandler environmentHandlerInstance;
 
 
 
@@ -28,6 +31,12 @@ public class UserInput : MonoBehaviour
     public bool placedWater;
     public bool placedFood;
     
+    void Start()
+    {
+        environmentHandlerInstance = GetComponent<EnvironmentHandler>();
+        
+        
+    }
 
     void Update()
     {
@@ -56,7 +65,11 @@ public class UserInput : MonoBehaviour
                     ResetLocation(foodString);
                 }
 
-                
+                if (clickedObject.CompareTag("Dirt"))
+                {
+                    ResetDirtiness(dirtString);
+                }
+
 
             }
         }
@@ -104,6 +117,15 @@ public class UserInput : MonoBehaviour
 
             water.SetActive(true);
         }
+    }
+    private void ResetDirtiness(string S)
+    {
+        if(S == "Dirt")
+        {
+            Dirt.SetActive(false);
+            environmentHandlerInstance.dirtyBar.fillAmount = environmentHandlerInstance.maxDirtiness / environmentHandlerInstance.curDirtiness;
+        }
+
     }
 
     private void clearBowls(string S)

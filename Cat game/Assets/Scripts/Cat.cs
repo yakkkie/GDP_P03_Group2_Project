@@ -11,6 +11,7 @@ public class Cat : MonoBehaviour, IConsume
     float timing;
     bool currentRoamComplete;
     bool isDead;
+    public GameObject LoseScreen;
 
     #region Stats
     public float MaxHealth;
@@ -47,12 +48,25 @@ public class Cat : MonoBehaviour, IConsume
         isDead = false;
         hungerDrainCor = StartCoroutine(HungerDrain());
         thirstDrainCor = StartCoroutine(ThirstDrain());
+        LoseScreen = GameObject.Find("Lose Screen");
+        LoseScreen.SetActive(false);
+
     }
 
     private void Update()
     {
         catFSM.Update();
-
+        if(currentHealth <=0 )
+        {
+            isDead = true;
+            catFSM.ChangeState(catFSM.catState_DIE);
+            LoseScreen.SetActive(true);
+        }
+        else
+        {
+            isDead = false;
+            LoseScreen.SetActive(false);
+        }
         if(timer > 3 && !isDead)
         {
             WalkRandomly();

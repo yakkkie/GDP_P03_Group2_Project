@@ -30,12 +30,16 @@ public class EnvironmentHandler : MonoBehaviour
     {
         CheckDirtiness();
         UpdateDirtyBar();
+        
     }
 
-    void UpdateDirtyBar()
+    public void UpdateDirtyBar()
     {
         dirtyBar.fillAmount = curDirtiness / maxDirtiness;
     }
+
+
+
 
     void SpawnDirt()
     {
