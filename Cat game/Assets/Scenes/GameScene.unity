@@ -2106,10 +2106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d67b41d58e19f94ab35414a0fa406ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mosquitoSpawn_1: {fileID: 0}
-  cockroachSpawn_1: {fileID: 0}
-  mosquitoSpawn_2: {fileID: 0}
-  cockroachSpawn_2: {fileID: 0}
+  pestPrefabs:
+  - {fileID: 3413602840787653690, guid: 6027983fe7428e844957e8e2ae45856f, type: 3}
+  - {fileID: 8745517883522414984, guid: a2f32252d9e2b384d8697b1efa8effe9, type: 3}
+  spawnTime: 2
+  initialSpawnDelay: 1
+  waterbowl: {fileID: 930119708}
+  foodbowl: {fileID: 1662620793}
 --- !u!4 &1056360362
 Transform:
   m_ObjectHideFlags: 0
@@ -2119,7 +2122,7 @@ Transform:
   m_GameObject: {fileID: 1056360360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.0662773, y: 0.12257535, z: 5.010587}
+  m_LocalPosition: {x: -2.075, y: 0.12257535, z: 5.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
