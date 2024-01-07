@@ -15,11 +15,16 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField]
     RectTransform Canvas;
 
+    [SerializeField]
+    LayerMask clickableLayer;
+
+    public bool pestItems;
+
     private Vector2 mOriginalLocalPointerPosition;
     private Vector3 mOriginalPanelLocalPosition;
     private Vector2 mOriginalPosition;
 
-    public LayerMask clickableLayer;
+    
     public Camera camera;
 
     private void Start()
@@ -69,10 +74,19 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
         if (Physics.Raycast(ray, out hit, 30f, clickableLayer))
         {
-            
+            if (pestItems)
+            {
+                
+                Destroy(hit.collider.gameObject);
 
-            Debug.Log(hit.point);
-            CreateObject(hit.point);
+            }
+            else
+            {
+                Debug.Log(hit.point);
+                CreateObject(hit.point);
+            }
+
+            
         }
         
         

@@ -1613,7 +1613,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759240716}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 768ddee3e85a3486287f727b660d4621, type: 3}
   m_Name: 
@@ -3701,6 +3701,7 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pestItems: 0
   camera: {fileID: 0}
 --- !u!114 &245197507598530021
 MonoBehaviour:
@@ -3828,6 +3829,7 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pestItems: 0
   camera: {fileID: 1414176679}
 --- !u!1 &542968059197409688
 GameObject:
@@ -4367,11 +4369,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabToInstantiate: {fileID: 5520926602976883765}
   UIDragElement: {fileID: 4177626362140441441}
-  Canvas: {fileID: 0}
+  Canvas: {fileID: 2000346176}
   clickableLayer:
     serializedVersion: 2
-    m_Bits: 8
-  camera: {fileID: 0}
+    m_Bits: 128
+  pestItems: 1
+  camera: {fileID: 1414176679}
 --- !u!1 &1884260041314184634
 GameObject:
   m_ObjectHideFlags: 0
@@ -5054,6 +5057,7 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pestItems: 0
   camera: {fileID: 1414176679}
 --- !u!222 &3420219701765548636
 CanvasRenderer:
@@ -5748,6 +5752,7 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pestItems: 0
   camera: {fileID: 0}
 --- !u!114 &5385722811590329001
 MonoBehaviour:
@@ -6067,6 +6072,7 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pestItems: 0
   camera: {fileID: 0}
 --- !u!224 &6417808588629956445
 RectTransform:
@@ -6471,6 +6477,7 @@ MonoBehaviour:
   clickableLayer:
     serializedVersion: 2
     m_Bits: 8
+  pestItems: 0
   camera: {fileID: 0}
 --- !u!222 &7448880422019360320
 CanvasRenderer:
