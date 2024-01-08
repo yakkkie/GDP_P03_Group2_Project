@@ -68,7 +68,7 @@ public class UserInput : MonoBehaviour
                     ResetLocation(foodString);
                 }
 
-                if (clickedObject.CompareTag("Dirt"))
+                if (hit.collider.CompareTag("Dirt"))
                 {
                     Despawns(faecesString);
                 }
@@ -121,7 +121,6 @@ public class UserInput : MonoBehaviour
 
                         // Pass the fillAmountDifference to AdjustDirtiness
                         environmentHandler.AdjustDirtiness();
-                        return;
                     }
                 }
             }

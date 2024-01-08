@@ -9,7 +9,9 @@ public class EnvironmentHandler : MonoBehaviour
     public Image cleanBar;
     public float maxDirtiness;
     public float curDirtiness;
-    private float offsetAmount = 0.1f;
+    public float increaseRate = 1f; // Rate at which dirtiness increases per second
+    public float decreaseAmount = 10f;
+
 
     public GameObject dirtPrefab;
     public List<GameObject> prefabs;
@@ -41,8 +43,8 @@ public class EnvironmentHandler : MonoBehaviour
 
     public void AdjustDirtiness()
     {
-        float currentFillAmount = curDirtiness / maxDirtiness;
-        dirtyBar.fillAmount = Mathf.Clamp(currentFillAmount - offsetAmount, 0f, 1f);
+        curDirtiness = Mathf.Clamp(curDirtiness - decreaseAmount, 0f, maxDirtiness);
+
     }
 
 
