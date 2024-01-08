@@ -11,6 +11,7 @@ public class EnvironmentHandler : MonoBehaviour
     public float curDirtiness;
     public float increaseRate = 1f; // Rate at which dirtiness increases per second
     public float decreaseAmount = 10f;
+    public GameObject loseScreen;
 
 
     public GameObject dirtPrefab;
@@ -28,6 +29,8 @@ public class EnvironmentHandler : MonoBehaviour
         dirtValues.Add(DirtyType.DIRT, 5);
         dirtValues.Add(DirtyType.FOODWASTE, 3);
         StartCoroutine(RandomSpawnDirt());
+        loseScreen = GameObject.Find("Lose2");
+        loseScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -71,7 +74,11 @@ public class EnvironmentHandler : MonoBehaviour
 
         if(curDirtiness >= maxDirtiness)
         {
-            //lose game
+            loseScreen.SetActive(true);
+        }
+        else
+        {
+            loseScreen.SetActive(false);
         }
     }
 

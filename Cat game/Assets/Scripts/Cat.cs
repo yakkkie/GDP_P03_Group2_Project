@@ -11,7 +11,7 @@ public class Cat : MonoBehaviour, IConsume
     float timing;
     bool currentRoamComplete;
     bool isDead;
-
+    public GameObject LoseScreen;
     #region Stats
     public float MaxHealth;
     public float MaxHunger;
@@ -47,12 +47,21 @@ public class Cat : MonoBehaviour, IConsume
         isDead = false;
         hungerDrainCor = StartCoroutine(HungerDrain());
         thirstDrainCor = StartCoroutine(ThirstDrain());
+        LoseScreen = GameObject.Find("Lose1");
+        LoseScreen.SetActive(false);
     }
 
     private void Update()
     {
         catFSM.Update();
-
+        if(currentHealth <= 0)
+        {
+            LoseScreen?.SetActive(true);
+        }
+        else
+        {
+            LoseScreen.SetActive(false);
+        }
         if(timer > 3 && !isDead)
         {
             WalkRandomly();
@@ -277,7 +286,7 @@ public class Cat : MonoBehaviour, IConsume
     }
     #endregion
 
-    private void Initialize()
+    public void Initialize()
     {
         #region Get Components
         agent = GetComponent<NavMeshAgent>();

@@ -260,6 +260,8 @@ public class CatState_DIE : CatState
     public override void EnterState()
     {
         base.EnterState();
+        animator.SetBool("walkBool", false);
+
     }
 
     public override void ExitState()
@@ -270,6 +272,7 @@ public class CatState_DIE : CatState
     #endregion
     public CatState_DIE(CatFSM fsm) : base(fsm)
     {
+
 
     }
 }
