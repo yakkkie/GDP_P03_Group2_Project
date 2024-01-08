@@ -9,6 +9,9 @@ public class UserInput : MonoBehaviour
     public GameObject foodBowl;
     public GameObject faeces;
     private EnvironmentHandler environmentHandler;
+    //public GameObject poop; 
+
+   // Collider faecesCollider;
 
     public float startY = 0.096f;
 
@@ -39,6 +42,8 @@ public class UserInput : MonoBehaviour
             environmentHandler = environmentObject.GetComponent<EnvironmentHandler>();
         }
         faeces.SetActive(true);
+        //faecesCollider = poop.GetComponent<Collider>();
+
     }
 
     void Update()
@@ -68,12 +73,12 @@ public class UserInput : MonoBehaviour
                     ResetLocation(foodString);
                 }
 
-                if (hit.collider.CompareTag("Dirt"))
+                if (clickedObject.CompareTag("Dirt"))//&& hit.collider == faecesCollider)
                 {
                     Despawns(faecesString);
                 }
 
-                
+
 
             }
         }
