@@ -18,8 +18,8 @@ public class Restart : MonoBehaviour
 
     public void RestartGame()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("BUTTON WORK HOORAY");
     }
 
     public void ReinitializeOtherScript()
