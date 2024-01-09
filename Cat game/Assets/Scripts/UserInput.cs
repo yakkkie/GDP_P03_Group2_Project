@@ -7,6 +7,11 @@ public class UserInput : MonoBehaviour
     public GameObject food;
     public GameObject waterBowl;
     public GameObject foodBowl;
+    public GameObject faeces;
+    private EnvironmentHandler environmentHandler;
+    //public GameObject poop; 
+
+   // Collider faecesCollider;
 
     public float startY = 0.096f;
 
@@ -17,6 +22,7 @@ public class UserInput : MonoBehaviour
 
     private string foodString = "food";
     private string waterString = "water";
+    private string faecesString = "faeces";
 
 
 
@@ -27,7 +33,18 @@ public class UserInput : MonoBehaviour
     //checks
     public bool placedWater;
     public bool placedFood;
-    
+
+    void Start()
+    {
+        GameObject environmentObject = GameObject.Find("EnvironmentHandler");
+        if (environmentObject != null)
+        {
+            environmentHandler = environmentObject.GetComponent<EnvironmentHandler>();
+        }
+        faeces.SetActive(true);
+        //faecesCollider = poop.GetComponent<Collider>();
+
+    }
 
     void Update()
     {
@@ -56,7 +73,12 @@ public class UserInput : MonoBehaviour
                     ResetLocation(foodString);
                 }
 
-                
+                if (clickedObject.CompareTag("Dirt"))//&& hit.collider == faecesCollider)
+                {
+                    Despawns(faecesString);
+                }
+
+
 
             }
         }
@@ -82,7 +104,40 @@ public class UserInput : MonoBehaviour
             Vector3 waterPos = new(0, startY, 0);
             water.transform.position = waterPos;
         }
+
+
     }
+    private void Despawns(string S)
+    {
+        if (S == "faeces")
+        {
+
+
+            if (faeces.activeSelf)
+            {
+                GameObject[] faecesObjects = GameObject.FindGameObjectsWithTag("Dirt");
+
+                foreach (GameObject faecesObj in faecesObjects)
+                {
+                    if (faecesObj.activeSelf)
+                    {
+                        faecesObj.SetActive(false);
+                        Debug.Log("Deactivated a faeces");
+
+                        // Pass the fillAmountDifference to AdjustDirtiness
+                        environmentHandler.AdjustDirtiness();
+                    }
+                }
+            }
+            else
+            {
+                faeces.SetActive(true);
+                environmentHandler.Update();
+            }
+        }
+    }
+
+
 
 
     private void SetLocation(string S)
@@ -110,5 +165,6 @@ public class UserInput : MonoBehaviour
     {
 
     }
+
 
 }
