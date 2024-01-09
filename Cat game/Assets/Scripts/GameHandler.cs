@@ -6,12 +6,16 @@ using TMPro;
 public class GameHandler : MonoBehaviour
 {
     float timePassed = 0;
-    float endTime = 60f;
+    float endTime = 30f;
     float timeTick = 0.1f;
 
     public TMP_Text timerText;
     public GameObject winScreen;
     public Cat cat;
+
+    
+
+
     private void Start()
     {
         StartCoroutine(Timer());
@@ -22,6 +26,7 @@ public class GameHandler : MonoBehaviour
         if(timePassed >= endTime)
         {
             winScreen.SetActive(true);
+            
         }
     }
 

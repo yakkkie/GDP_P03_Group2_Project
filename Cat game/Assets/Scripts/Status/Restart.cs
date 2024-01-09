@@ -9,10 +9,13 @@ public class Restart : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("BUTTON WORK HOORAY");
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        
+        
     }
 
-    
+   
+
 }
 

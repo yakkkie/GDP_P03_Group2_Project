@@ -57,6 +57,7 @@ public class Cat : MonoBehaviour, IConsume
         if(currentHealth <= 0)
         {
             LoseScreen?.SetActive(true);
+            
         }
         else
         {
