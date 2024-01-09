@@ -6,7 +6,7 @@ using TMPro;
 public class GameHandler : MonoBehaviour
 {
     float timePassed = 0;
-    float endTime = 10f;
+    float endTime = 60f;
     float timeTick = 0.1f;
 
     public TMP_Text timerText;
