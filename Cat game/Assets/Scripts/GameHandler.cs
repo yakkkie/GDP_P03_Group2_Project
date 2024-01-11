@@ -5,8 +5,8 @@ using TMPro;
 
 public class GameHandler : MonoBehaviour
 {
-    float timePassed = 0;
-    float endTime = 30f;
+    public float timePassed = 0;
+    float endTime = 120f;
     float timeTick = 0.1f;
 
     public TMP_Text timerText;
