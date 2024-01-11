@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraMovementController : MonoBehaviour
 {
     public float swipeRotationSpeed = 2.0f;
+    public Transform cat;
+    public Camera camera;
     private float rotationSmoothness = 5.0f;
     private float minRotationY = -64f;   // Set minimum Y rotation limit
     private float maxRotationY = -28f;   // Set maximum Y rotation limit
@@ -12,17 +14,37 @@ public class CameraMovementController : MonoBehaviour
     private Vector2 touchStartPos;
     private bool isSwiping = false;
     private float targetRotationY;
+    
+
+    public GameHandler gameHandler;
+    private float time;
+
 
     void Start()
     {
         // Initialize the targetRotationY with the current Y rotation of the camera
-        targetRotationY = -42.108f;
+        targetRotationY = -60.883f;
+        
     }
 
     void Update()
     {
-        HandleSwipeInput();
-        SmoothRotation();
+        time = gameHandler.timePassed;
+
+        if (time >= 5)
+        {
+            
+            HandleSwipeInput();
+           // SmoothRotation();
+        }
+
+        else
+        {
+            AutoRotation();
+       
+        }
+
+        
     }
 
     void HandleSwipeInput()
@@ -48,6 +70,8 @@ public class CameraMovementController : MonoBehaviour
                         targetRotationY = Mathf.Clamp(targetRotationY - swipeValue * swipeRotationSpeed,
                                                       minRotationY, maxRotationY);
 
+                        transform.rotation = Quaternion.Euler(20.589f, targetRotationY, 1.753f);
+
                         Debug.Log("lol"+ "\n" + transform.eulerAngles.y);
 
                         touchStartPos = touch.position;
@@ -67,6 +91,12 @@ public class CameraMovementController : MonoBehaviour
         // Smoothly rotate the camera towards the target rotation
         float smoothedRotationY = Mathf.LerpAngle(transform.eulerAngles.y, targetRotationY, rotationSmoothness * Time.deltaTime);
         transform.rotation = Quaternion.Euler(20.589f, smoothedRotationY, 1.753f);
+    }
+
+    void AutoRotation()
+    {
+
+        transform.LookAt(cat);
     }
 }
 

@@ -29,6 +29,7 @@ public class Cat : MonoBehaviour, IConsume
     public CatStatusUIHandler uiHandler;
     public Transform foodBowlTrans;
     public Transform waterBowlTrans;
+    public float healthDrainMultiplier;
 
 
     //store the cat status and its priority
@@ -95,8 +96,15 @@ public class Cat : MonoBehaviour, IConsume
     #region Status Logic
     public IEnumerator HungerDrain()
     {
-        while(currentHunger > 0)
+        while(true)
         {
+            if (currentHunger <= 0)
+            {
+                yield return null;
+                continue;
+            }
+
+
             currentHunger -= hungerDrainRate;
             currentHunger = Mathf.Clamp(currentHunger, 0, MaxHunger);
             yield return new WaitForSeconds(1);
@@ -105,12 +113,21 @@ public class Cat : MonoBehaviour, IConsume
     
     public IEnumerator ThirstDrain()
     {
-        while(currentThirst > 0)
+        while(true)
         {
+            if (currentThirst <= 0)
+            {
+                yield return null;
+                continue;
+            }
+
+
             currentThirst -= thirstDrainRate;
             currentThirst = Mathf.Clamp(currentThirst, 0, MaxThirst);
+            Debug.Log("Thirstdrain");
             yield return new WaitForSeconds(1);
         }
+
     }
 
     public IEnumerator HealthDrain()
@@ -125,7 +142,7 @@ public class Cat : MonoBehaviour, IConsume
             if (currentThirst / MaxThirst > 0.5)
                 thirstInfluence = 0;
 
-            float healthDrain = (hungerInfluence + thirstInfluence);
+            float healthDrain = (hungerInfluence + thirstInfluence) * healthDrainMultiplier;
 
             currentHealth -= healthDrain;
             currentHealth = Mathf.Clamp(currentHealth, 0, MaxHealth);
