@@ -12,13 +12,17 @@ public class GameHandler : MonoBehaviour
     public TMP_Text timerText;
     public GameObject winScreen;
     public Cat cat;
+    public GameObject LoseScreen1;
+    public GameObject LoseScreen2;
 
-    
+
 
 
     private void Start()
     {
         StartCoroutine(Timer());
+        LoseScreen1 = GameObject.Find("Lose1");
+        LoseScreen2 = GameObject.Find("Lose2");
     }
 
     private void Update()
@@ -28,6 +32,11 @@ public class GameHandler : MonoBehaviour
             winScreen.SetActive(true);
             
         }
+        if(LoseScreen1|| LoseScreen2)
+        {
+            winScreen.SetActive(false);
+        }
+
     }
 
     IEnumerator Timer()
