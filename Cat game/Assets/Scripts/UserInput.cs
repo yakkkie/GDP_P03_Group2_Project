@@ -19,6 +19,8 @@ public class UserInput : MonoBehaviour
     private Vector3 foodPos;
     private Vector3 waterPos;
 
+    private Vector3 waterScale;
+    private Vector3 foodScale;
 
     private string foodString = "food";
     private string waterString = "water";
@@ -43,6 +45,9 @@ public class UserInput : MonoBehaviour
         }
         faeces.SetActive(true);
         //faecesCollider = poop.GetComponent<Collider>();
+
+        waterScale = water.transform.localScale;
+        foodScale = food.transform.localScale;
 
     }
 
@@ -94,6 +99,7 @@ public class UserInput : MonoBehaviour
             
             Vector3 foodPos = new(0,startY,0);
             food.transform.position = foodPos;
+            food.transform.localScale = foodScale;
         }
 
         if (S == "water")
@@ -103,6 +109,7 @@ public class UserInput : MonoBehaviour
             
             Vector3 waterPos = new(0, startY, 0);
             water.transform.position = waterPos;
+            water.transform.localScale = waterScale;
         }
 
 

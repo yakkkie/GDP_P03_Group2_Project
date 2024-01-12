@@ -6,7 +6,7 @@ using TMPro;
 public class GameHandler : MonoBehaviour
 {
     public float timePassed = 0;
-    float endTime = 120f;
+    float endTime = 60f;
     float timeTick = 0.1f;
 
     public TMP_Text timerText;
@@ -23,6 +23,7 @@ public class GameHandler : MonoBehaviour
         StartCoroutine(Timer());
         LoseScreen1 = GameObject.Find("Lose1");
         LoseScreen2 = GameObject.Find("Lose2");
+        winScreen.active = false;
     }
 
     private void Update()
@@ -32,7 +33,7 @@ public class GameHandler : MonoBehaviour
             winScreen.SetActive(true);
             
         }
-        if(LoseScreen1|| LoseScreen2)
+        if(LoseScreen1.active || LoseScreen2.active)
         {
             winScreen.SetActive(false);
         }

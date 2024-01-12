@@ -4017,12 +4017,12 @@ MonoBehaviour:
   currentHealth: 0
   currentHunger: 0
   currentThirst: 0
-  hungerDrainRate: 10
-  thirstDrainRate: 10
+  hungerDrainRate: 5
+  thirstDrainRate: 5
   uiHandler: {fileID: 683847092}
   foodBowlTrans: {fileID: 1662620794}
   waterBowlTrans: {fileID: 930119709}
-  healthDrainMultiplier: 3
+  healthDrainMultiplier: 1.5
 --- !u!54 &1856919159
 Rigidbody:
   m_ObjectHideFlags: 0
