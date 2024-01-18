@@ -4017,8 +4017,8 @@ MonoBehaviour:
   currentHealth: 0
   currentHunger: 0
   currentThirst: 0
-  hungerDrainRate: 5
-  thirstDrainRate: 5
+  hungerDrainRate: 2
+  thirstDrainRate: 4
   uiHandler: {fileID: 683847092}
   foodBowlTrans: {fileID: 1662620794}
   waterBowlTrans: {fileID: 930119709}
