@@ -23,7 +23,7 @@ public class CameraMovementController : MonoBehaviour
     void Start()
     {
         // Initialize the targetRotationY with the current Y rotation of the camera
-        targetRotationY = -60.883f;
+        //targetRotationY = -60.883f;
         
     }
 
@@ -40,6 +40,7 @@ public class CameraMovementController : MonoBehaviour
 
         else
         {
+            targetRotationY = transform.rotation.eulerAngles.y;
             AutoRotation();
        
         }
