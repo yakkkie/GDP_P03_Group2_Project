@@ -11,7 +11,7 @@ public class UserInput : MonoBehaviour
     private EnvironmentHandler environmentHandler;
     //public GameObject poop; 
 
-   // Collider faecesCollider;
+    // Collider faecesCollider;
 
     public float startY = 0.096f;
 
@@ -58,11 +58,11 @@ public class UserInput : MonoBehaviour
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-           
+
             if (Physics.Raycast(ray, out hit, 30f, clickableLayer))
             {
 
-                
+
                 GameObject clickedObject = hit.collider.gameObject;
 
                 Debug.Log(clickedObject.tag);
@@ -96,8 +96,8 @@ public class UserInput : MonoBehaviour
         {
             foodBowl.SetActive(false);
             foodBowl.transform.position = Vector3.zero;
-            
-            Vector3 foodPos = new(0,startY,0);
+
+            Vector3 foodPos = new(0, startY, 0);
             food.transform.position = foodPos;
             food.transform.localScale = foodScale;
         }
@@ -106,7 +106,7 @@ public class UserInput : MonoBehaviour
         {
             waterBowl.SetActive(false);
             waterBowl.transform.position = Vector3.zero;
-            
+
             Vector3 waterPos = new(0, startY, 0);
             water.transform.position = waterPos;
             water.transform.localScale = waterScale;

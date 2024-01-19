@@ -1,7 +1,6 @@
-using System.Collections;
+using FiniteStateMachine;
 using System.Collections.Generic;
 using UnityEngine;
-using FiniteStateMachine;
 
 
 public class MouseFSM : FSM
@@ -13,7 +12,7 @@ public class MouseFSM : FSM
     //public MouseState_IDLE MouseState_IDLE;
     //public MouseState_HOLDITEM MouseState_HOLDITEM;
     //public MouseState_DROPITEM MouseState_DROPITEM;
-    
+
 
     public Animator animator;
 
@@ -30,5 +29,5 @@ public class MouseFSM : FSM
         currentState.UpdateState();
     }
 
-    
+
 }

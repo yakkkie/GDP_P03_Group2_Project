@@ -1,6 +1,6 @@
-using UnityEngine;
 using Cinemachine;
- 
+using UnityEngine;
+
 /// <summary>
 /// An add-on module for Cinemachine Virtual Camera that locks the camera's Z co-ordinate
 /// </summary>

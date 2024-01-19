@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using FiniteStateMachine;
+using UnityEngine;
 
 public class MouseState : State
 {
@@ -12,7 +10,7 @@ public class MouseState : State
         #region State Method
         public override void EnterState()
         {
-            
+
             Debug.Log("IDLE_ENTER");
 
             base.EnterState();

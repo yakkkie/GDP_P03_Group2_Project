@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -33,7 +32,7 @@ public class Cat : MonoBehaviour, IConsume
 
 
     //store the cat status and its priority
-    public Dictionary<CatStatusName,CatStatus> catStatuses;
+    public Dictionary<CatStatusName, CatStatus> catStatuses;
     public CatStatus currentPriority;
     Coroutine healthDrainCor;
     Coroutine hungerDrainCor;
@@ -55,24 +54,24 @@ public class Cat : MonoBehaviour, IConsume
     private void Update()
     {
         catFSM.Update();
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             LoseScreen?.SetActive(true);
-            
+
         }
         else
         {
             LoseScreen.SetActive(false);
         }
-        if(timer > 3 && !isDead)
+        if (timer > 3 && !isDead)
         {
             WalkRandomly();
             timer = 0;
         }
 
-        if(currentHunger/MaxHunger < 0.5 || currentThirst/MaxThirst < 0.5)
+        if (currentHunger / MaxHunger < 0.5 || currentThirst / MaxThirst < 0.5)
         {
-            if(healthDrainCor == null)
+            if (healthDrainCor == null)
                 healthDrainCor = StartCoroutine(HealthDrain());
         }
         else
@@ -80,7 +79,7 @@ public class Cat : MonoBehaviour, IConsume
             if (healthDrainCor != null)
                 StopCoroutine(healthDrainCor);
         }
-            
+
 
         CheckFlags();
         CheckPriority();
@@ -96,7 +95,7 @@ public class Cat : MonoBehaviour, IConsume
     #region Status Logic
     public IEnumerator HungerDrain()
     {
-        while(true)
+        while (true)
         {
             if (currentHunger <= 0)
             {
@@ -109,11 +108,11 @@ public class Cat : MonoBehaviour, IConsume
             currentHunger = Mathf.Clamp(currentHunger, 0, MaxHunger);
             yield return new WaitForSeconds(1);
         }
-    } 
-    
+    }
+
     public IEnumerator ThirstDrain()
     {
-        while(true)
+        while (true)
         {
             if (currentThirst <= 0)
             {
@@ -167,10 +166,10 @@ public class Cat : MonoBehaviour, IConsume
     public void CheckPriority()
     {
         CatStatus highestPriority = catStatuses[CatStatusName.IDLE];
-        foreach(var item in catStatuses.Values)
+        foreach (var item in catStatuses.Values)
         {
 
-            if(item.priority > highestPriority.priority && item.flag)
+            if (item.priority > highestPriority.priority && item.flag)
             {
                 Debug.Log("priority switched");
                 highestPriority = item;
@@ -186,14 +185,14 @@ public class Cat : MonoBehaviour, IConsume
     public void CheckFlags()
     {
         ///check if cat is hungry or not hungry
-        if(currentHunger/MaxHunger < 0.5 && !catStatuses[CatStatusName.HUNGRY].flag)
+        if (currentHunger / MaxHunger < 0.5 && !catStatuses[CatStatusName.HUNGRY].flag)
         {
             CatStatus s = catStatuses[CatStatusName.HUNGRY];
             s.flag = true;
             catStatuses[CatStatusName.HUNGRY] = s;
             Debug.Log(catStatuses[CatStatusName.HUNGRY].flag);
         }
-        else if(!(currentHunger / MaxHunger < 0.5) && catStatuses[CatStatusName.HUNGRY].flag)
+        else if (!(currentHunger / MaxHunger < 0.5) && catStatuses[CatStatusName.HUNGRY].flag)
         {
             CatStatus s = catStatuses[CatStatusName.HUNGRY];
             s.flag = false;
@@ -201,7 +200,7 @@ public class Cat : MonoBehaviour, IConsume
         }
 
         //check if cat is thirsty or not thirst
-        if(currentThirst/MaxThirst < 0.5 && !catStatuses[CatStatusName.THIRSTY].flag)
+        if (currentThirst / MaxThirst < 0.5 && !catStatuses[CatStatusName.THIRSTY].flag)
         {
             CatStatus s = catStatuses[CatStatusName.THIRSTY];
             s.flag = true;
@@ -216,7 +215,7 @@ public class Cat : MonoBehaviour, IConsume
 
 
         //check if cat is sick or not sick
-        if(currentHealth/MaxHealth < 0.5 && !catStatuses[CatStatusName.SICK].flag)
+        if (currentHealth / MaxHealth < 0.5 && !catStatuses[CatStatusName.SICK].flag)
         {
             CatStatus s = catStatuses[CatStatusName.SICK];
             s.flag = true;
@@ -287,7 +286,7 @@ public class Cat : MonoBehaviour, IConsume
 
 
                 break;
- 
+
         }
     }
 
@@ -317,7 +316,7 @@ public class Cat : MonoBehaviour, IConsume
         currentThirst = MaxThirst;
         #endregion
 
-        catFSM = new(animator,agent,this);
+        catFSM = new(animator, agent, this);
 
         agent.speed = moveSpeed;
         agent.updateRotation = true;
@@ -328,18 +327,18 @@ public class Cat : MonoBehaviour, IConsume
         CatStatus thirsty = new(CatStatusName.THIRSTY, 1);
         CatStatus sick = new(CatStatusName.SICK, 2);
 
-        catStatuses.Add(CatStatusName.IDLE,idle);
+        catStatuses.Add(CatStatusName.IDLE, idle);
         catStatuses.Add(CatStatusName.HUNGRY, hungry);
         catStatuses.Add(CatStatusName.THIRSTY, thirsty);
         catStatuses.Add(CatStatusName.SICK, sick);
-        
+
 
         currentRoamComplete = true;
     }
 
     public struct CatStatus
     {
-        public  int priority;
+        public int priority;
         public CatStatusName statusName;
         public bool flag;
 
@@ -357,6 +356,6 @@ public class Cat : MonoBehaviour, IConsume
         HUNGRY,
         THIRSTY,
         SICK,
- 
+
     }
 }

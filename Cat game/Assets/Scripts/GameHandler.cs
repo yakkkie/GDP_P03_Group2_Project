@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
@@ -28,12 +27,12 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        if(timePassed >= endTime)
+        if (timePassed >= endTime)
         {
             winScreen.SetActive(true);
-            
+
         }
-        if(LoseScreen1.active || LoseScreen2.active)
+        if (LoseScreen1.active || LoseScreen2.active)
         {
             winScreen.SetActive(false);
         }

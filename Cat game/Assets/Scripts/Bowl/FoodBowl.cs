@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FoodBowl : Bowl
 {
     public GameObject bowl; // Reference to the bowl object
-    
+
     private bool isCollided = false;
     public AnimationCurve animationCurve;
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -32,7 +30,7 @@ public class FoodBowl : Bowl
             moveMesh();
             Debug.Log(transform.position.y);
             // Adjust scaling to fit within the bowl
-            FitInBowl(); 
+            FitInBowl();
             Debug.Log("COLLIDED :D:D:D:D::D");
         }
     }

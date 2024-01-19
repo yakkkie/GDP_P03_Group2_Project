@@ -41,7 +41,7 @@ public class BowlConsume : MonoBehaviour
         if (other.CompareTag("Cat"))
         {
             cat = other.GetComponent<Cat>();
-            isCollided = true;           
+            isCollided = true;
         }
     }
 

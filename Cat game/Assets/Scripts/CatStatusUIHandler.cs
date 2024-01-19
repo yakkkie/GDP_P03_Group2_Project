@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatStatusUIHandler : MonoBehaviour
 {
@@ -29,7 +27,7 @@ public class CatStatusUIHandler : MonoBehaviour
 
     void UpdateHungerBar()
     {
-        hungerBar.fillAmount = cat.currentHunger/cat.MaxHunger;
+        hungerBar.fillAmount = cat.currentHunger / cat.MaxHunger;
     }
 
     void UpdateThirstBar()

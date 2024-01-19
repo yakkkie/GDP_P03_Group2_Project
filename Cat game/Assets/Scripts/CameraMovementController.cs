@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovementController : MonoBehaviour
@@ -14,7 +12,7 @@ public class CameraMovementController : MonoBehaviour
     private Vector2 touchStartPos;
     private bool isSwiping = false;
     private float targetRotationY;
-    
+
 
     public GameHandler gameHandler;
     private float time;
@@ -24,7 +22,7 @@ public class CameraMovementController : MonoBehaviour
     {
         // Initialize the targetRotationY with the current Y rotation of the camera
         //targetRotationY = -60.883f;
-        
+
     }
 
     void Update()
@@ -33,19 +31,19 @@ public class CameraMovementController : MonoBehaviour
 
         if (time >= 5)
         {
-            
+
             HandleSwipeInput();
-           // SmoothRotation();
+            // SmoothRotation();
         }
 
         else
         {
             targetRotationY = transform.rotation.eulerAngles.y;
             AutoRotation();
-       
+
         }
 
-        
+
     }
 
     void HandleSwipeInput()
@@ -73,7 +71,7 @@ public class CameraMovementController : MonoBehaviour
 
                         transform.rotation = Quaternion.Euler(20.589f, targetRotationY, 1.753f);
 
-                        Debug.Log("lol"+ "\n" + transform.eulerAngles.y);
+                        Debug.Log("lol" + "\n" + transform.eulerAngles.y);
 
                         touchStartPos = touch.position;
                     }

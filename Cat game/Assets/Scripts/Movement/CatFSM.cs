@@ -1,12 +1,11 @@
- using System.Collections;
+using FiniteStateMachine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using FiniteStateMachine;
 
 public class CatFSM : FSM
 {
-   
+
     public Dictionary<CatStateName, CatState> StateDict = new Dictionary<CatStateName, CatState>();
 
     public CatState currentState;
@@ -26,7 +25,7 @@ public class CatFSM : FSM
         currentState.ExitState();
 
         currentState = nextState;
-        currentState.EnterState();   
+        currentState.EnterState();
     }
 
     public void Update()
@@ -53,7 +52,7 @@ public class CatFSM : FSM
         currentState.FixedUpdateState();
     }
 
-    public CatFSM(Animator Animator, NavMeshAgent Agent,Cat Cat)
+    public CatFSM(Animator Animator, NavMeshAgent Agent, Cat Cat)
     {
         animator = Animator;
         agent = Agent;

@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
 using FiniteStateMachine;
+using UnityEngine;
 
 public class CatState : State
 {
     public Animator animator;
     public CatFSM fsm;
     public Cat cat;
-    
+
     #region State Method
     public override void EnterState()
     {
@@ -60,7 +57,7 @@ public class CatState_IDLE : CatState
     public override void UpdateState()
     {
         base.UpdateState();
-        
+
     }
 
     public override void FixedUpdateState()
@@ -83,7 +80,7 @@ public class CatState_WALK : CatState
     public override void EnterState()
     {
         animator.SetBool("walkBool", true);
-     
+
     }
 
     public override void ExitState()
@@ -95,7 +92,7 @@ public class CatState_WALK : CatState
     {
         if (fsm.agent.velocity.magnitude <= 0)
             fsm.ChangeState(fsm.CatState_IDLE);
-            
+
     }
 
     public override void FixedUpdateState()
@@ -141,7 +138,7 @@ public class CatState_JUMP : CatState
     }
     #endregion
 
-    public CatState_JUMP (CatFSM fsm) : base(fsm)
+    public CatState_JUMP(CatFSM fsm) : base(fsm)
     {
 
     }
@@ -168,14 +165,14 @@ public class CatState_EAT : CatState
 
     public override void UpdateState()
     {
-        if(timer > 0.2)
+        if (timer > 0.2)
         {
             cat.currentHunger = Mathf.Clamp(cat.currentHunger += 15, 0, cat.MaxHunger);
 
             timer = 0;
         }
 
-        if(cat.currentHunger/cat.MaxHunger > 1)
+        if (cat.currentHunger / cat.MaxHunger > 1)
         {
             isEating = false;
         }
