@@ -75,6 +75,7 @@ public class EnvironmentHandler : MonoBehaviour
         if(curDirtiness >= maxDirtiness)
         {
             loseScreen.SetActive(true);
+            Time.timeScale = 0;
             
         }
         else

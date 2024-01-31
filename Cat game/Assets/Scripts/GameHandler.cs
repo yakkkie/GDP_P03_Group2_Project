@@ -31,6 +31,7 @@ public class GameHandler : MonoBehaviour
         if(timePassed >= endTime)
         {
             winScreen.SetActive(true);
+            Time.timeScale = 0;
             
         }
         if(LoseScreen1.active || LoseScreen2.active)
