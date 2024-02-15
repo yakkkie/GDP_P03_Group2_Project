@@ -16,6 +16,9 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     [SerializeField]
     LayerMask clickableLayer;
 
+    [SerializeField]
+    Inventory inventory;
+
     public bool pestItems;
 
     public Camera camera;
@@ -33,6 +36,17 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnBeginDrag(PointerEventData data)
     {
+        // Check if the item is a swatter
+        if (gameObject.CompareTag("Swatter"))
+        {
+            // Check if the swatter's quantity is greater than 0
+            int swatterQuantity = inventory.GetItemQuantity(1); // Assuming swatter's itemID is 1
+            if (swatterQuantity <= 0)
+            {
+                return; // Skip drag operation if the quantity is 0
+            }
+        }
+        
         mOriginalPanelLocalPosition = UIDragElement.localPosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             Canvas,
@@ -47,8 +61,20 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
     }
 
+
     public void OnDrag(PointerEventData data)
     {
+        // Check if the item is a swatter
+        if (gameObject.CompareTag("Swatter"))
+        {
+            // Check if the swatter's quantity is greater than 0
+            int swatterQuantity = inventory.GetItemQuantity(1); // Assuming swatter's itemID is 1
+            if (swatterQuantity <= 0)
+            {
+                return; // Skip drag operation if the quantity is 0
+            }
+        }
+
         Vector2 localPointerPosition;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             Canvas,
@@ -67,6 +93,17 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        // Check if the item is a swatter
+        if (gameObject.CompareTag("Swatter"))
+        {
+            // Check if the swatter's quantity is greater than 0
+            int swatterQuantity = inventory.GetItemQuantity(1); // Assuming swatter's itemID is 1
+            if (swatterQuantity <= 0)
+            {
+                return; // Skip drag operation if the quantity is 0
+            }
+        }
+        
         // Enable camera movement when dragging ends
         if (cameraController != null)
         {
@@ -76,20 +113,22 @@ public class DragUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         StartCoroutine(Coroutine_MoveUIElement(UIDragElement, mOriginalPosition, 0.5f));
 
         RaycastHit hit;
-        Ray ray = camera.ScreenPointToRay(
-            Input.mousePosition);
-
-        Debug.DrawRay(camera.transform.position, ray.direction * 10f, Color.red, 10f);
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, 30f, clickableLayer))
         {
+            // If the swatter is dragged onto pests
             if (pestItems)
             {
+                // Destroy the pest
                 Destroy(hit.collider.gameObject);
+
+                // Use a swatter from the inventory
+                inventory.UseItem(1); // Assuming swatter's itemID is 1
             }
             else
             {
-                Debug.Log(hit.point);
+                // Create an object at the hit point
                 CreateObject(hit.point);
             }
         }

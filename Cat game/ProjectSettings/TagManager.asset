@@ -9,6 +9,8 @@ TagManager:
   - Foodbowl
   - Dirt
   - Pest
+  - Event
+  - Swatter
   layers:
   - Default
   - TransparentFX
