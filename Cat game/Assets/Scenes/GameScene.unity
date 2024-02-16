@@ -2208,6 +2208,7 @@ RectTransform:
   - {fileID: 1361648322}
   - {fileID: 767465441}
   - {fileID: 830369206}
+  - {fileID: 1391508578}
   m_Father: {fileID: 2000346176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4052,9 +4053,11 @@ MonoBehaviour:
   increaseRate: 1
   decreaseAmount: 10
   loseScreen: {fileID: 1021246690365530095}
+  cat: {fileID: 1856919156}
   dirtPrefab: {fileID: 8006845525788215177, guid: 86bf32c3e85524519b708b4456304a31, type: 3}
   prefabs:
   - {fileID: 8006845525788215177, guid: 86bf32c3e85524519b708b4456304a31, type: 3}
+  sickText: {fileID: 1391508579}
 --- !u!1 &760681865
 GameObject:
   m_ObjectHideFlags: 0
@@ -6983,6 +6986,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361648321}
   m_CullTransparentMesh: 1
+--- !u!1 &1391508577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1391508578}
+  - component: {fileID: 1391508580}
+  - component: {fileID: 1391508579}
+  m_Layer: 5
+  m_Name: SickCat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1391508578
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391508577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.8044, y: 1.8044, z: 1.8044}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 358839322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.5559, y: 195.89}
+  m_SizeDelta: {x: 253.1119, y: 85.1761}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1391508579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391508577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Cat is sick!
+--- !u!222 &1391508580
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391508577}
+  m_CullTransparentMesh: 1
 --- !u!1 &1414129784
 GameObject:
   m_ObjectHideFlags: 0
@@ -8549,6 +8631,7 @@ MonoBehaviour:
   currentThirst: 0
   hungerDrainRate: 5
   thirstDrainRate: 5
+  sickHealthDrainRate: 0.02
   uiHandler: {fileID: 683847092}
   foodBowlTrans: {fileID: 1662620794}
   waterBowlTrans: {fileID: 930119709}

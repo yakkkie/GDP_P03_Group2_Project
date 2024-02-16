@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Cat : MonoBehaviour, IConsume
 {
@@ -22,6 +23,8 @@ public class Cat : MonoBehaviour, IConsume
 
     public float hungerDrainRate;
     public float thirstDrainRate;
+    public float sickHealthDrainRate;
+
     #endregion
 
     public CatFSM catFSM;
@@ -90,6 +93,18 @@ public class Cat : MonoBehaviour, IConsume
     {
         timer += Time.fixedDeltaTime;
         catFSM.FixedUpdate();
+    }
+
+    public void MakeSick()
+    {
+        if (!catStatuses[CatStatusName.SICK].flag)
+        {
+            CatStatus s = catStatuses[CatStatusName.SICK];
+            s.flag = true;
+            catStatuses[CatStatusName.SICK] = s;
+
+            Debug.Log("Cat is now sick!");
+        }
     }
 
     #region Status Logic

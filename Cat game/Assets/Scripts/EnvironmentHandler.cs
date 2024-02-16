@@ -12,18 +12,21 @@ public class EnvironmentHandler : MonoBehaviour
     public float decreaseAmount = 10f;
     public GameObject loseScreen;
 
+    public Cat cat; // Reference to the Cat script
 
     public GameObject dirtPrefab;
     public List<GameObject> prefabs;
     public Dictionary<DirtyType, float> dirtValues;
     List<Dirt> dirtOnMap = new();
 
+    public Text sickText; 
+
     float timer = 0;
 
     void Start()
     {
         curDirtiness = 0;
-        dirtValues = new();
+        dirtValues = new Dictionary<DirtyType, float>();
         dirtValues.Add(DirtyType.PEST, 5);
         dirtValues.Add(DirtyType.DIRT, 5);
         dirtValues.Add(DirtyType.FOODWASTE, 3);
@@ -65,20 +68,42 @@ public class EnvironmentHandler : MonoBehaviour
     {
         GameObject[] dirtObjects = GameObject.FindGameObjectsWithTag("Dirt");
 
-        foreach (GameObject dirtObj in dirtObjects)
+         float dirtinessPercentage = curDirtiness / maxDirtiness;
+        Debug.Log("Current dirtiness percentage: " + dirtinessPercentage);
+
+        if (dirtinessPercentage >= 0.5f)
         {
-            Dirt dirt = dirtObj.GetComponent<Dirt>();
-            AddToDirtOnMap(dirt);
+            // Dirtiness exceeds 50%, set the sick flag in the Cat script
+            if (cat != null)
+            {
+                cat.MakeSick();
+                Debug.Log("Cat is getting sick!");
+                sickText.gameObject.SetActive(true); // Show the sick text when the cat is sick
+                cat.currentHealth -= cat.sickHealthDrainRate;
+            }
         }
+
+        if (dirtinessPercentage <= 0.5f)
+        {
+            sickText.gameObject.SetActive(false); // Show the sick text when the cat is sick
+            Debug.Log("Cat is no longer sick");
+            cat.currentHealth += cat.sickHealthDrainRate;
+        }
+
 
         if (curDirtiness >= maxDirtiness)
         {
             loseScreen.SetActive(true);
-
         }
         else
         {
             loseScreen.SetActive(false);
+        }
+
+        foreach (GameObject dirtObj in dirtObjects)
+        {
+            Dirt dirt = dirtObj.GetComponent<Dirt>();
+            AddToDirtOnMap(dirt);
         }
     }
 
